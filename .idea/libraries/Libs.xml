@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="Libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/aopalliance-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/backport-util-concurrent-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/blazeds-common-3.2.0.3978.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/blazeds-core-3.2.0.3978.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jcl-over-slf4j-1.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jetlang-0.2.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.1.22.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/slf4j-api-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/slf4j-log4j12-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spring-aop-3.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spring-beans-3.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spring-context-3.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spring-core-3.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/spring-expression-3.2.2.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/netty-all-4.1.22.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
