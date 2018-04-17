@@ -1,13 +1,51 @@
 package top.zhuoxinsocial.server.room;
 
-import top.zhuoxinsocial.server.map.Map;
+
+import top.zhuoxinsocial.server.map.GameMap;
 import top.zhuoxinsocial.server.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room {
+enum Status {WAITING, PLAYING, PAUSED, OVER}
+
+public class Room implements Runnable {
+    Status status = Status.WAITING;
     String name;
-    Map map;
+    GameMap gameMap;
     List<User> players = new ArrayList<>();
+
+    Thread thread;
+    public Room(String name) {
+        this.name = name;
+    }
+
+    public void loadmap(String mapname) {
+        this.gameMap = new GameMap(mapname);
+    }
+
+    public void startGame() {
+        status = Status.PLAYING;
+        if (thread == null)
+            thread = new Thread(this);
+        if (!thread.isAlive())
+            thread.start();
+        System.out.println("Room " + name + " started");
+    }
+
+    @Override
+    public void run() {
+        wait4Start();
+
+    }
+
+    public void wait4Start() {
+        while (status != Status.PLAYING || gameMap == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

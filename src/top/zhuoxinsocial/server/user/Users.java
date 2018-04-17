@@ -19,9 +19,14 @@ public class Users {
         return user;
     }
 
-    public User getUser(String by, Object v) throws Exception {
+    public User getUser(String by, Object v){
         for (User u : users) {
-            Object val = Tools.invokeMethod(u, "get"+by, new Object[0]);
+            Object val;
+            try {
+                val = Tools.invokeMethod(u, "get"+by, new Object[0]);
+            } catch (Exception e) {
+                throw new Error(e);
+            }
             if (Objects.equals(val, v))
                 return u;
         }
@@ -35,7 +40,7 @@ public class Users {
         return appendUser(spt[1], spt[2], spt[3]);
     }
 
-    public User login(String paragram) throws Exception {
+    public User login(String paragram) {
         String[] spt = paragram.split(" ");
         if (spt.length < 3)
             return User.getNullUser();

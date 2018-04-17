@@ -10,6 +10,7 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import top.zhuoxinsocial.server.game.GameLogic;
+import top.zhuoxinsocial.server.room.Rooms;
 
 
 public class GameServer implements Network {
@@ -52,9 +53,11 @@ public class GameServer implements Network {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
 
+
             System.out.println("GameServer 关闭了");
         }
     }
+
 
 
 }

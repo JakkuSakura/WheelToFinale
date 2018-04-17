@@ -72,13 +72,11 @@ public class User {
         return this;
     }
 
-    public void enterRoom(Room room)
-    {
+    public void enterRoom(Room room) {
         this.nowRoom = room;
     }
 
-    public Room getNowRoom()
-    {
+    public Room getNowRoom() {
         return nowRoom;
     }
 
@@ -89,12 +87,12 @@ public class User {
     public void sendMessage(String s) {
         channel.writeAndFlush(s);
     }
-    public SocketAddress getAddr()
-    {
+
+    public SocketAddress getAddr() {
         return addr;
     }
 
-    static private User nulluser;
+    private static User nulluser;
     private int uid;
     private String nickname;
     private String email;

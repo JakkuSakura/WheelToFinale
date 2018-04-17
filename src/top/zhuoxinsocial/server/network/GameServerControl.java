@@ -51,37 +51,9 @@ public class GameServerControl extends SimpleChannelInboundHandler<String> { // 
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception { // (4)
+    protected void channelRead0(ChannelHandlerContext ctx, String s) { // (4)
         Channel incoming = ctx.channel();
-        String[] spt = s.split(" ");
-        switch (spt[0]) {
-            case "signup": {
-                User u = users.signup(s);
-                if (u.isNull()) {
-                    incoming.writeAndFlush("Input error\n");
-                    break;
-                }
-                incoming.writeAndFlush("signed up, please login\n");
-                break;
-            }
-            case "login": {
-                User u = users.login(s);
-                if (u.isNull()) {
-                    incoming.writeAndFlush("Password error\n");
-                    break;
-                }
-                incoming.writeAndFlush("logged in successfully\n");
-                u.bindChannel(incoming);
-                break;
-            }
-            case "data": {
-                User u = users.getUser("Addr", incoming.remoteAddress().toString());
-                if (u.isNull())
-                    break;
-                gameLogic.receiveMessage(u, s);
-            }
-
-        }
+        gameLogic.processMessage(incoming, s);
         System.out.println(incoming.remoteAddress() + " said: " + s);
     }
 
