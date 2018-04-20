@@ -2,7 +2,7 @@ package top.zhuoxinsocial.server.room;
 
 
 import top.zhuoxinsocial.server.map.GameMap;
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Room implements Runnable {
     Status status = Status.WAITING;
     String name;
     GameMap gameMap;
-    List<User> players = new ArrayList<>();
+    List<Player> players = new ArrayList<>();
 
     Thread thread;
     public Room(String name) {

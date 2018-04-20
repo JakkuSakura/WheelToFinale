@@ -12,7 +12,7 @@ public class CreateRoom implements GameImp {
     @Override
     public void Action(Channel incoming, String s) {
         String[] spt = s.split(" ");
-        if (!gameLogic.getUsers().getUser("Addr", incoming.remoteAddress()).isNull())
+        if (!gameLogic.getPlayers().getPlayer("Addr", incoming.remoteAddress()).isNull())
             gameLogic.getRooms().createRoom(spt[1]);
 
     }

@@ -1,6 +1,6 @@
 package top.zhuoxinsocial.server.map;
 
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class City {
             put("wealth", 0);
             put("water", 100);
             put("water_supply", 100);
-            put("owner", User.getNullUser());
+            put("owner", Player.getNullUser());
         }
     };
     City() {

@@ -1,7 +1,7 @@
 package top.zhuoxinsocial.server.game;
 
 import io.netty.channel.Channel;
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 public class UserAction implements GameImp {
 
@@ -12,7 +12,7 @@ public class UserAction implements GameImp {
     }
     @Override
     public void Action(Channel incoming, String s) {
-        User u = gameLogic.getUsers().getUser("Addr", incoming.remoteAddress());
+        Player u = gameLogic.getPlayers().getPlayer("Addr", incoming.remoteAddress());
         if (u.isNull())
             return;
         gameLogic.receiveMessage(u, s);

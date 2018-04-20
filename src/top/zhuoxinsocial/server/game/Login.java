@@ -1,6 +1,6 @@
 package top.zhuoxinsocial.server.game;
 
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 import io.netty.channel.Channel;
 
@@ -13,7 +13,7 @@ public class Login implements GameImp{
     @Override
     public void Action(Channel incoming, String s) {
         try {
-            User u = gameLogic.getUsers().login(s);
+            Player u = gameLogic.getPlayers().login(s);
             if (u.isNull()) {
                 incoming.writeAndFlush("Password error\n");
                 return;

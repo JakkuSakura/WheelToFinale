@@ -1,7 +1,7 @@
 package top.zhuoxinsocial.server.game;
 
 import io.netty.channel.Channel;
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 public class EnterRoom implements GameImp{
     private GameLogic gameLogic;
@@ -12,7 +12,7 @@ public class EnterRoom implements GameImp{
     @Override
     public void Action(Channel incoming, String s) {
         String[] spt = s.split(" ");
-        User u = gameLogic.getUsers().getUser("Addr", incoming.remoteAddress());
+        Player u = gameLogic.getPlayers().getPlayer("Addr", incoming.remoteAddress());
         if (u.isNull())
             return;
         u.enterRoom(gameLogic.getRooms().getRoom(spt[1]));

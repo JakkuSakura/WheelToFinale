@@ -7,13 +7,13 @@ import top.zhuoxinsocial.server.room.Room;
 import java.net.SocketAddress;
 import java.util.Objects;
 
-public class User {
+public class Player {
 
     public int getUid() {
         return uid;
     }
 
-    public User setUid(int uid) {
+    public Player setUid(int uid) {
         this.uid = uid;
         return this;
     }
@@ -22,7 +22,7 @@ public class User {
         return nickname;
     }
 
-    public User setNickname(String nickname) {
+    public Player setNickname(String nickname) {
         this.nickname = nickname;
         return this;
     }
@@ -31,18 +31,18 @@ public class User {
         return email;
     }
 
-    public User setEmail(String email) {
+    public Player setEmail(String email) {
         this.email = email;
         return this;
     }
 
 
-    public User setNull(boolean aNull) {
+    public Player setNull(boolean aNull) {
         isNull = aNull;
         return this;
     }
 
-    public User setPassword(String password) {
+    public Player setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -55,9 +55,9 @@ public class User {
         return isNull;
     }
 
-    static public User getNullUser() {
+    static public Player getNullUser() {
         if (nulluser == null) {
-            nulluser = new User()
+            nulluser = new Player()
                     .setEmail("Null")
                     .setNickname("Null")
                     .setUid(-1)
@@ -66,7 +66,7 @@ public class User {
         return nulluser;
     }
 
-    public User bindChannel(Channel channel) {
+    public Player bindChannel(Channel channel) {
         this.channel = channel;
         this.addr = channel.remoteAddress();
         return this;
@@ -92,7 +92,7 @@ public class User {
         return addr;
     }
 
-    private static User nulluser;
+    private static Player nulluser;
     private int uid;
     private String nickname;
     private String email;

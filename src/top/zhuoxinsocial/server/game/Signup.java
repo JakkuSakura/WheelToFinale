@@ -1,7 +1,7 @@
 package top.zhuoxinsocial.server.game;
 
 import io.netty.channel.Channel;
-import top.zhuoxinsocial.server.user.User;
+import top.zhuoxinsocial.server.user.Player;
 
 public class Signup implements GameImp{
     private GameLogic gameLogic;
@@ -11,7 +11,7 @@ public class Signup implements GameImp{
     }
     @Override
     public void Action(Channel incoming, String s) {
-        User u = gameLogic.getUsers().signup(s);
+        Player u = gameLogic.getPlayers().signup(s);
         if (u.isNull()) {
             incoming.writeAndFlush("Input error\n");
             return;

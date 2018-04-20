@@ -8,10 +8,7 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import top.zhuoxinsocial.server.game.GameLogic;
-import top.zhuoxinsocial.server.user.User;
-import top.zhuoxinsocial.server.user.Users;
-
-import java.net.InetSocketAddress;
+import top.zhuoxinsocial.server.user.Players;
 
 @ChannelHandler.Sharable
 public class GameServerControl extends SimpleChannelInboundHandler<String> { // (1)
@@ -22,11 +19,11 @@ public class GameServerControl extends SimpleChannelInboundHandler<String> { // 
      */
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private GameLogic gameLogic;
-    private Users users;
+    private Players players;
 
     public GameServerControl(GameLogic gameLogic) {
         this.gameLogic = gameLogic;
-        this.users = this.gameLogic.getUsers();
+        this.players = this.gameLogic.getPlayers();
     }
 
     @Override
