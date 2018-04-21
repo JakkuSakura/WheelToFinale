@@ -13,7 +13,7 @@ public class UserAction implements GameImp {
     @Override
     public void Action(Channel incoming, String s) {
         Player u = gameLogic.getPlayers().getPlayer("Addr", incoming.remoteAddress());
-        if (u.isNull())
+        if (u == null)
             return;
         gameLogic.receiveMessage(u, s);
     }

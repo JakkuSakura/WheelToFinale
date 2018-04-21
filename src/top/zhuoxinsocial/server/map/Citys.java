@@ -5,19 +5,35 @@ import org.w3c.dom.NodeList;
 import top.zhuoxinsocial.XMLTools;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Citys {
-    private List<City> cityList = new ArrayList<>();
 
-    public Citys() {
+    private final List<City> arrayList = new ArrayList<>();
 
+    public Iterator<City> iterator() {
+        return arrayList.iterator();
     }
 
+    public int size() {
+        return arrayList.size();
+    }
 
+    public boolean isEmpty() {
+        return arrayList.isEmpty();
+    }
 
-    public static void main(String[] args) {
+    public boolean contains(City city) {
+        return arrayList.contains(city);
+    }
 
+    public boolean add(City city) {
+        return arrayList.add(city);
+    }
+
+    public void clear() {
+        arrayList.clear();
     }
 }
 

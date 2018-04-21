@@ -2,7 +2,9 @@ package top.zhuoxinsocial;
 
 import org.w3c.dom.*;
 
+import java.lang.reflect.Type;
 import java.util.Objects;
+import java.util.Optional;
 
 public class MyXMLNode implements Node {
 
@@ -17,12 +19,11 @@ public class MyXMLNode implements Node {
     }
 
     public void printTree(int depth) {
-        forEachNode((index, node) -> {
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                String fmt = "%" + (depth > 0 ? depth * 4 : "") + "s%s\n";
-                System.out.format(fmt, "", node.getNodeName());
-                node.printTree(depth + 1);
-            }
+        forEachNode(Node.ELEMENT_NODE, (index, node) -> {
+            String fmt = "%" + (depth > 0 ? depth * 4 : "") + "s%s\n";
+            System.out.format(fmt, "", node.getNodeName());
+            node.printTree(depth + 1);
+
         });
     }
 
@@ -37,7 +38,11 @@ public class MyXMLNode implements Node {
         } else if (index > path.length) {
             return null;
         } else {
-            return getChild(path[index]).getNodeByPath(path, index + 1);
+            MyXMLNode child = getChild(path[index]);
+            if (child == null) {
+                return null;
+            }
+            return child.getNodeByPath(path, index + 1);
         }
     }
 
@@ -45,17 +50,17 @@ public class MyXMLNode implements Node {
     public MyXMLNode getChild(String child) {
         String[] spt = child.split("[\\[|\\]]");
         final int[] count = {spt.length > 1 ? Integer.parseInt(spt[1]) : 0};
-        final Node[] result = {null};
+        final MyXMLNode[] result = {null};
         forEachNode((index, node1) -> {
             if (count[0] >= 0) {
                 if (Objects.equals(node1.getNodeName(), spt[0])) {
                     if (count[0] == 0)
-                        result[0] = node1;
+                        result[0] = new MyXMLNode(node1);
                     --count[0];
                 }
             }
         });
-        return new MyXMLNode(result[0]);
+        return result[0];
     }
 
     public String getText(String defaultValue) {
@@ -83,7 +88,13 @@ public class MyXMLNode implements Node {
         }
     }
 
-
+    public void forEachNode(short nodetype, ForeachNodeAction action) {
+        final int[] myindex = {0};
+        forEachNode((index, node) -> {
+            if (node.getNodeType() == nodetype)
+                action.action(myindex[0]++, node);
+        });
+    }
 
     public String getNodeName() {
         return node.getNodeName();
@@ -233,3 +244,5 @@ public class MyXMLNode implements Node {
         return node.getUserData(key);
     }
 }
+
+

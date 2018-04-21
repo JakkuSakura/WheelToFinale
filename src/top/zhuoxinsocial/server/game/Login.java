@@ -14,7 +14,7 @@ public class Login implements GameImp{
     public void Action(Channel incoming, String s) {
         try {
             Player u = gameLogic.getPlayers().login(s);
-            if (u.isNull()) {
+            if (u == null) {
                 incoming.writeAndFlush("Password error\n");
                 return;
             }

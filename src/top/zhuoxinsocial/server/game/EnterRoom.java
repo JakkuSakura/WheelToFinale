@@ -13,7 +13,7 @@ public class EnterRoom implements GameImp{
     public void Action(Channel incoming, String s) {
         String[] spt = s.split(" ");
         Player u = gameLogic.getPlayers().getPlayer("Addr", incoming.remoteAddress());
-        if (u.isNull())
+        if (u == null)
             return;
         u.enterRoom(gameLogic.getRooms().getRoom(spt[1]));
     }

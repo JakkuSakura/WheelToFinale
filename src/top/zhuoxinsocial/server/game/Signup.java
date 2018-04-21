@@ -12,7 +12,7 @@ public class Signup implements GameImp{
     @Override
     public void Action(Channel incoming, String s) {
         Player u = gameLogic.getPlayers().signup(s);
-        if (u.isNull()) {
+        if (u == null) {
             incoming.writeAndFlush("Input error\n");
             return;
         }

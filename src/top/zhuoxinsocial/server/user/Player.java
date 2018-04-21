@@ -5,66 +5,37 @@ import io.netty.channel.*;
 import top.zhuoxinsocial.server.room.Room;
 
 import java.net.SocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Player {
 
-    public int getUid() {
-        return uid;
-    }
+    private final Map<String, Object> values = new HashMap<>();
 
-    public Player setUid(int uid) {
-        this.uid = uid;
-        return this;
+    public int getUid() {
+        return (int) get("uid");
     }
 
     public String getNickname() {
-        return nickname;
-    }
-
-    public Player setNickname(String nickname) {
-        this.nickname = nickname;
-        return this;
+        return (String) get("nickname");
     }
 
     public String getEmail() {
-        return email;
+        return (String) get("email");
     }
 
-    public Player setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-
-    public Player setNull(boolean aNull) {
-        isNull = aNull;
-        return this;
-    }
-
-    public Player setPassword(String password) {
-        this.password = password;
-        return this;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Player)
+            return Objects.equals(get("uid"), ((Player) obj).get("uid"));
+        return false;
     }
 
     public boolean equalPass(String password) {
-        return Objects.equals(this.password, password);
+        return Objects.equals(get("password"), password);
     }
 
-    public boolean isNull() {
-        return isNull;
-    }
-
-    static public Player getNullUser() {
-        if (nulluser == null) {
-            nulluser = new Player()
-                    .setEmail("Null")
-                    .setNickname("Null")
-                    .setUid(-1)
-                    .setNull(true);
-        }
-        return nulluser;
-    }
 
     public Player bindChannel(Channel channel) {
         this.channel = channel;
@@ -73,7 +44,7 @@ public class Player {
     }
 
     public void enterRoom(Room room) {
-        this.nowRoom = room;
+        nowRoom = room;
     }
 
     public Room getNowRoom() {
@@ -92,14 +63,33 @@ public class Player {
         return addr;
     }
 
-    private static Player nulluser;
-    private int uid;
-    private String nickname;
-    private String email;
-    private String password;
     private Channel channel;
     private SocketAddress addr;
     private Room nowRoom;
-    private boolean isNull = false;
+
+    public int size() {
+        return values.size();
+    }
+
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+
+    public boolean containsKey(String key) {
+        return values.containsKey(key);
+    }
+
+    public Object get(String key) {
+        return values.get(key);
+    }
+
+    public Player set(String key, Object value) {
+        values.put(key, value);
+        return this;
+    }
+
+    public void clear() {
+        values.clear();
+    }
 
 }

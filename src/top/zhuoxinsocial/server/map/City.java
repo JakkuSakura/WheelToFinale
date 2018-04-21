@@ -15,17 +15,17 @@ public class City {
             put("wealth", 0);
             put("water", 100);
             put("water_supply", 100);
-            put("owner", Player.getNullUser());
+            put("owner", null);
         }
     };
     City() {
     }
 
-    City setValue(String key, Object value) {
+    City set(String key, Object value) {
         values.put(key, value);
         return this;
     }
-    Object getValue(String key) {
+    Object get(String key) {
         if (values.containsKey(key)) {
             return values.get(key);
         } else {
