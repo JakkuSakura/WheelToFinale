@@ -21,7 +21,7 @@ public class Room implements Runnable {
     }
 
     public void loadmap(String mapname) {
-        this.gameMap = new GameMap(mapname);
+        this.gameMap = GameMap.loadMap(mapname);
     }
 
     public void startGame() {

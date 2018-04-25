@@ -1,14 +1,14 @@
 package top.zhuoxinsocial.server.map;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import top.zhuoxinsocial.XMLTools;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLNode;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLType;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
-public class Citys {
+public class Cities implements MyXMLType {
 
     private final List<City> arrayList = new ArrayList<>();
 
@@ -34,6 +34,26 @@ public class Citys {
 
     public void clear() {
         arrayList.clear();
+    }
+
+    @Override
+    public Object get() {
+        return this;
+    }
+
+    @Override
+    public void add(String name, Object obj) {
+        add((City) obj);
+    }
+
+    @Override
+    public boolean check(MyXMLNode node) {
+        return Objects.equals(node.getXMLType(), "City");
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CONTAINER;
     }
 }
 

@@ -41,7 +41,7 @@ public class GameLogic {
 
     }
     public void receiveMessage(Player player, String s) {
-        System.out.println("Received from " + player.getNickname());
+        System.out.println("Received from " + player.get("nickname"));
         sendMessage(player, s);
     }
 

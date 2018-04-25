@@ -1,7 +1,7 @@
 package top.zhuoxinsocial.server.user;
 
 
-import io.netty.channel.*;
+import io.netty.channel.Channel;
 import top.zhuoxinsocial.server.room.Room;
 
 import java.net.SocketAddress;
@@ -12,18 +12,6 @@ import java.util.Objects;
 public class Player {
 
     private final Map<String, Object> values = new HashMap<>();
-
-    public int getUid() {
-        return (int) get("uid");
-    }
-
-    public String getNickname() {
-        return (String) get("nickname");
-    }
-
-    public String getEmail() {
-        return (String) get("email");
-    }
 
     @Override
     public boolean equals(Object obj) {

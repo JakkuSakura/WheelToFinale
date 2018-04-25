@@ -1,8 +1,7 @@
-package top.zhuoxinsocial;
+package top.zhuoxinsocial.Tools.XMLTool;
 
 import org.w3c.dom.*;
 
-import java.lang.reflect.Type;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,8 +19,8 @@ public class MyXMLNode implements Node {
 
     public void printTree(int depth) {
         forEachNode(Node.ELEMENT_NODE, (index, node) -> {
-            String fmt = "%" + (depth > 0 ? depth * 4 : "") + "s%s\n";
-            System.out.format(fmt, "", node.getNodeName());
+            String fmt = "%" + (depth > 0 ? depth * 4 : "") + "s%s %s\n";
+            System.out.format(fmt, "", node.getNodeName(), getXMLType());
             node.printTree(depth + 1);
 
         });
@@ -63,17 +62,22 @@ public class MyXMLNode implements Node {
         return result[0];
     }
 
-    public String getText(String defaultValue) {
-        return hasText() ? getFirstChild().getNodeValue() : defaultValue;
+    public String getText() {
+        return hasText() ? getFirstChild().getNodeValue() : null;
     }
 
-    public int getInt(int defaultValue) {
-        String text = getText(null);
-        return text != null ? Integer.parseInt(text) : defaultValue;
+    public int getInt() {
+        String text = getText();
+        return Integer.parseInt(text);
     }
 
     public boolean hasText() {
         return getChildNodes().getLength() == 1 && getFirstChild().getNodeType() == Node.TEXT_NODE;
+    }
+
+    public String getXMLType() {
+        return Optional.ofNullable(node.getAttributes()).map(a -> a.getNamedItem("type")).map(Node::getNodeValue).orElse("unknown");
+
     }
 
     public interface ForeachNodeAction {

@@ -1,9 +1,12 @@
 package top.zhuoxinsocial.server.map;
 
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLNode;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLType;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Soldier {
+public class Soldier implements MyXMLType {
 
 
     private final Map<String, Object> hashMap = new HashMap<>();
@@ -33,4 +36,23 @@ public class Soldier {
         hashMap.clear();
     }
 
+    @Override
+    public Object get() {
+        return this;
+    }
+
+    @Override
+    public void add(String name, Object obj) {
+        set(name, obj);
+    }
+
+    @Override
+    public boolean check(MyXMLNode node) {
+        return true;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CONTAINER;
+    }
 }

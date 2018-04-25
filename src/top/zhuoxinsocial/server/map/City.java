@@ -1,36 +1,58 @@
 package top.zhuoxinsocial.server.map;
 
-import top.zhuoxinsocial.server.user.Player;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLNode;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLType;
 
 import java.util.HashMap;
-import java.util.Map;
 
-@SuppressWarnings("unchecked")
-public class City {
-    private Map values = new HashMap();
-    static Map DEFAULT_VALUES = new HashMap(){
-        {
-            put("population", 10);
-            put("defence", 10);
-            put("wealth", 0);
-            put("water", 100);
-            put("water_supply", 100);
-            put("owner", null);
-        }
-    };
-    City() {
+public class City implements MyXMLType {
+    private final HashMap<String, Object> hashMap = new HashMap<>();
+
+    public int size() {
+        return hashMap.size();
     }
 
-    City set(String key, Object value) {
-        values.put(key, value);
+    public boolean isEmpty() {
+        return hashMap.isEmpty();
+    }
+
+    public boolean containsKey(String key) {
+        return hashMap.containsKey(key);
+    }
+
+    public Object get(String key) {
+        return hashMap.get(key);
+    }
+
+    public Object put(String key, Object value) {
+        return hashMap.put(key, value);
+    }
+
+    public Object remove(String key) {
+        return hashMap.remove(key);
+    }
+
+    public void clear() {
+        hashMap.clear();
+    }
+
+    @Override
+    public Object get() {
         return this;
     }
-    Object get(String key) {
-        if (values.containsKey(key)) {
-            return values.get(key);
-        } else {
-            return DEFAULT_VALUES.get(key);
-        }
+
+    @Override
+    public void add(String name, Object obj) {
+        put(name, obj);
     }
 
+    @Override
+    public boolean check(MyXMLNode node) {
+        return true;
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CONTAINER;
+    }
 }

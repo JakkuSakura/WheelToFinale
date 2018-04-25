@@ -1,10 +1,14 @@
 package top.zhuoxinsocial.server.map;
 
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLNode;
+import top.zhuoxinsocial.Tools.XMLTool.MyXMLType;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
-public class Army {
+public class Army implements MyXMLType {
     private final List<Soldier> soldierList = new ArrayList<>();
 
     public List<Soldier> getSoldierList() {
@@ -37,5 +41,25 @@ public class Army {
 
     public Iterator<Soldier> iterator() {
         return soldierList.iterator();
+    }
+
+    @Override
+    public Object get() {
+        return this;
+    }
+
+    @Override
+    public void add(String name, Object obj) {
+        add((Soldier) obj);
+    }
+
+    @Override
+    public boolean check(MyXMLNode node) {
+        return Objects.equals(node.getXMLType(), "Soldier");
+    }
+
+    @Override
+    public Type getType() {
+        return Type.CONTAINER;
     }
 }
