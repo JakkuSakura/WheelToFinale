@@ -62,13 +62,20 @@ public class MyXMLNode implements Node {
         return result[0];
     }
 
+    public String getAttrText(String attr) {
+        return getAttributes().getNamedItem(attr).getFirstChild().getNodeValue();
+    }
+
+    public Integer getAttrInt(String attr) {
+        return Optional.ofNullable(getAttrText(attr)).map(Integer::parseInt).orElse(null);
+    }
+
     public String getText() {
         return hasText() ? getFirstChild().getNodeValue() : null;
     }
 
-    public int getInt() {
-        String text = getText();
-        return Integer.parseInt(text);
+    public Integer getInt() {
+        return Optional.ofNullable(getText()).map(Integer::parseInt).orElse(null);
     }
 
     public boolean hasText() {

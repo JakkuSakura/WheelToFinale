@@ -13,7 +13,7 @@ public class GameMap implements MyXMLType {
     private Map<String, Object> values;
     private String mapname;
 
-    public GameMap() {
+    private GameMap() {
     }
 
 
@@ -37,6 +37,16 @@ public class GameMap implements MyXMLType {
 
     }
 
+    public Cities getCity() {
+        return (Cities) values.get("cities");
+    }
+
+    public Heroes getHeroes() {
+        return (Heroes) values.get("heroes");
+    }
+
+
+
     @Override
     public Object get() {
         return this;
@@ -47,9 +57,8 @@ public class GameMap implements MyXMLType {
         values.put(name, obj);
     }
 
-    @Override
-    public boolean check(MyXMLNode node) {
-        return false;
+    public Landscape getLandscape() {
+        return (Landscape) values.get("landscape");
     }
 
     public String getMapname() {
@@ -59,6 +68,11 @@ public class GameMap implements MyXMLType {
     public GameMap setMapname(String mapname) {
         this.mapname = mapname;
         return this;
+    }
+
+    @Override
+    public boolean check(MyXMLNode node) {
+        return true;
     }
 
     @Override
