@@ -42,7 +42,7 @@ public class Landscape implements MyXMLType {
     }
 
     @Override
-    public boolean check(MyXMLNode node) {
+    public boolean check(MyXMLNode node) { 
 
 
         width = node.getAttrInt("width");
