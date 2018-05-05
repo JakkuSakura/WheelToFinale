@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="jmelibs">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../jME_SDK/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../jME_SDK/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../jME_SDK/sources" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../jME_SDK/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../jME_SDK/sources" recursive="false" type="SOURCES" />
+  </library>
+</component>

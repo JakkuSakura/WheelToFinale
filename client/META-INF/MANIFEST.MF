@@ -1,0 +1,51 @@
+Manifest-Version: 1.0
+Class-Path: libs/gson-2.2.2.jar libs/log4j-1.2.16.jar libs/jetlang-0.2
+ .9.jar libs/aopalliance-1.0.jar libs/slf4j-api-1.6.1.jar libs/slf4j-l
+ og4j12-1.6.1.jar libs/jcl-over-slf4j-1.7.2.jar libs/netty-all-4.1.22.
+ Final.jar libs/blazeds-core-3.2.0.3978.jar libs/spring-aop-3.2.2.RELE
+ ASE.jar libs/blazeds-common-3.2.0.3978.jar libs/spring-core-3.2.2.REL
+ EASE.jar libs/spring-beans-3.2.2.RELEASE.jar libs/backport-util-concu
+ rrent-3.1.jar libs/spring-context-3.2.2.RELEASE.jar libs/netty-all-4.
+ 1.22.Final-sources.jar libs/spring-expression-3.2.2.RELEASE.jar libs/
+ core.jar libs/gson.jar libs/joal.jar libs/jocl.jar libs/xpp3.jar libs
+ /lwjgl.jar libs/nifty.jar libs/jinput.jar libs/jsr305.jar libs/jutils
+ .jar libs/simple.jar libs/dense64.jar libs/jbullet.jar libs/vecmath.j
+ ar libs/denseC64.jar libs/eventbus.jar libs/jogl-all.jar libs/j-ogg-a
+ ll.jar libs/jme3-core.jar libs/jme3-jogg.jar libs/jme3-jogl.jar libs/
+ joal-main.jar libs/jocl-main.jar libs/gluegen-rt.jar libs/jme3-lwjgl.
+ jar libs/stack-alloc.jar libs/jglfont-core.jar libs/jme3-blender.jar 
+ libs/jme3-desktop.jar libs/jme3-effects.jar libs/jme3-jbullet.jar lib
+ s/jme3-plugins.jar libs/jme3-terrain.jar libs/jme3-niftygui.jar libs/
+ jme3-testdata.jar libs/jogl-all-main.jar libs/nifty-examples.jar libs
+ /gluegen-rt-main.jar libs/jme3-networking.jar libs/nifty-style-black.
+ jar libs/nifty-default-controls.jar libs/joal-natives-linux-i586.jar 
+ libs/jocl-natives-linux-i586.jar libs/joal-natives-linux-amd64.jar li
+ bs/joal-natives-linux-armv6.jar libs/jocl-natives-linux-amd64.jar lib
+ s/jocl-natives-linux-armv6.jar libs/joal-natives-solaris-i586.jar lib
+ s/joal-natives-windows-i586.jar libs/jocl-natives-solaris-i586.jar li
+ bs/jocl-natives-windows-i586.jar libs/joal-natives-android-armv6.jar 
+ libs/joal-natives-linux-armv6hf.jar libs/joal-natives-solaris-amd64.j
+ ar libs/joal-natives-windows-amd64.jar libs/jocl-natives-android-armv
+ 6.jar libs/jocl-natives-linux-armv6hf.jar libs/jocl-natives-solaris-a
+ md64.jar libs/jocl-natives-windows-amd64.jar libs/lwjgl-platform-nati
+ ves-osx.jar libs/jinput-platform-natives-osx.jar libs/jogl-all-native
+ s-linux-i586.jar libs/joal-natives-android-aarch64.jar libs/jocl-nati
+ ves-android-aarch64.jar libs/jogl-all-natives-linux-amd64.jar libs/jo
+ gl-all-natives-linux-armv6.jar libs/lwjgl-platform-natives-linux.jar 
+ libs/gluegen-rt-natives-linux-i586.jar libs/jinput-platform-natives-l
+ inux.jar libs/joal-natives-macosx-universal.jar libs/jocl-natives-mac
+ osx-universal.jar libs/jogl-all-natives-solaris-i586.jar libs/jogl-al
+ l-natives-windows-i586.jar libs/gluegen-rt-natives-linux-amd64.jar li
+ bs/gluegen-rt-natives-linux-armv6.jar libs/jogl-all-natives-android-a
+ rmv6.jar libs/jogl-all-natives-linux-armv6hf.jar libs/jogl-all-native
+ s-solaris-amd64.jar libs/jogl-all-natives-windows-amd64.jar libs/lwjg
+ l-platform-natives-windows.jar libs/gluegen-rt-natives-solaris-i586.j
+ ar libs/gluegen-rt-natives-windows-i586.jar libs/jinput-platform-nati
+ ves-windows.jar libs/gluegen-rt-natives-android-armv6.jar libs/gluege
+ n-rt-natives-linux-armv6hf.jar libs/gluegen-rt-natives-solaris-amd64.
+ jar libs/gluegen-rt-natives-windows-amd64.jar libs/jogl-all-natives-a
+ ndroid-aarch64.jar libs/jogl-all-natives-macosx-universal.jar libs/gl
+ uegen-rt-natives-android-aarch64.jar libs/gluegen-rt-natives-macosx-u
+ niversal.jar
+Main-Class: client.Main
+

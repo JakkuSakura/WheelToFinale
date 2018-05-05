@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="client:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/client_jar</output-path>
+    <root id="root">
+      <element id="archive" name="client.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/client/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="client" />
+        <element id="module-output" name="tools" />
+      </element>
+      <element id="directory" name="libs">
+        <element id="library" level="project" name="jmelibs" />
+        <element id="library" level="project" name="nettylibs" />
+      </element>
+    </root>
+  </artifact>
+</component>

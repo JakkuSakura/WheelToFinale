@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/server_jar</output-path>
+    <root id="root">
+      <element id="directory" name="libs">
+        <element id="library" level="project" name="nettylibs" />
+      </element>
+      <element id="archive" name="server.jar">
+        <element id="module-output" name="server" />
+        <element id="module-output" name="tools" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/server/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
