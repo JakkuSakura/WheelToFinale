@@ -7,7 +7,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/client/META-INF/MANIFEST.MF" />
         </element>
         <element id="module-output" name="client" />
-        <element id="module-output" name="tools" />
+        <element id="module-output" name="shared" />
       </element>
       <element id="directory" name="libs">
         <element id="library" level="project" name="jmelibs" />

@@ -7,7 +7,7 @@
       </element>
       <element id="archive" name="server.jar">
         <element id="module-output" name="server" />
-        <element id="module-output" name="tools" />
+        <element id="module-output" name="shared" />
         <element id="directory" name="META-INF">
           <element id="file-copy" path="$PROJECT_DIR$/server/META-INF/MANIFEST.MF" />
         </element>

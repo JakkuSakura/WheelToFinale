@@ -7,8 +7,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jmelibs" level="project" />
-    <orderEntry type="library" name="nettylibs" level="project" />
-    <orderEntry type="module" module-name="shared" />
   </component>
 </module>

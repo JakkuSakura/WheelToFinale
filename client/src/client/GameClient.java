@@ -1,69 +1,61 @@
 package client;
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
-
+import client.input.Control;
+import client.message.Message;
+import client.message.MessagePools;
+import client.message.MessageProcessor;
+import client.message.MessageProcessors;
+import client.network.Network;
+import client.output.Display;
+import client.output.Sounds;
+import client.tools.*;
 
 public class GameClient {
-    private String host;
-    private int port;
-    private Input input;
-
-    public GameClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-        input = new Input();
+    private Control control = new Control();
+    private MessagePools messagePools = new MessagePools();
+    private MessageProcessors messageProcessors = new MessageProcessors(10);
+    private Sounds sounds = new Sounds();
+    private Display display = new Display(control);
+    private Manager manager = new Manager();
+    private Network network = new Network("0.0.0.0", 8888);
+    public void run() throws Exception {
+        display.start();
+        network.autoConnect(1000);
+        messageProcessors.addProcessor(new MessageProcessor(messagePools.getMessagePool(Message.Type.GAME), manager));
     }
+
+    GameClient() {
+
+    }
+
+    public Control getControl() {
+        return control;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public MessagePools getMessagePools() {
+        return messagePools;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public Sounds getSounds() {
+        return sounds;
+    }
+
+    public Network getNetwork() {
+        return network;
+    }
+
 
     public static void main(String[] args) throws Exception {
-        new GameClient("localhost", 8080).autoConnect();
+        GameClient gameClient = new GameClient();
+        gameClient.run();
     }
-
-    public void connect() {
-        EventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap
-                    .group(group)
-                    .channel(NioSocketChannel.class)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel arg0) {
-                            ChannelPipeline pipeline = arg0.pipeline();
-                            pipeline.addLast(new StringDecoder());
-                            pipeline.addLast(new StringEncoder());
-                            pipeline.addLast(new LengthFieldPrepender(2));
-                            pipeline.addLast(new GameClientHandler());
-//                          pipeline.addLast(new HeartBeatReqHandler());
-                        }
-                    });
-
-            ChannelFuture f = bootstrap.connect(host, port).sync();
-            Channel channel = f.channel();
-            input.setChannel(channel);
-            channel.closeFuture().sync();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            group.shutdownGracefully();
-            input.setChannel(null);
-        }
-    }
-
-    public void autoConnect() throws Exception {
-        input.start();
-        while (true) {
-            System.out.println("Trying connecting");
-            connect();
-            Thread.sleep(3000);
-        }
-    }
-
 
 }

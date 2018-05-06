@@ -1,16 +1,14 @@
 package server.network;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import server.game.GameLogic;
-import server.user.Players;
+import server.GameServer;
 
-@ChannelHandler.Sharable
+
 public class GameServerControl extends SimpleChannelInboundHandler<String> { // (1)
 
     /**
@@ -18,12 +16,10 @@ public class GameServerControl extends SimpleChannelInboundHandler<String> { // 
      * A closed Channel is automatically removed from the collection,
      */
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-    private GameLogic gameLogic;
-    private Players players;
+    private GameServer gameServer;
 
-    public GameServerControl(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
-        this.players = this.gameLogic.getPlayers();
+    public GameServerControl(GameServer gameServer) {
+        this.gameServer = gameServer;
     }
 
     @Override
@@ -50,7 +46,7 @@ public class GameServerControl extends SimpleChannelInboundHandler<String> { // 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) { // (4)
         Channel incoming = ctx.channel();
-        gameLogic.processMessage(incoming, s);
+        gameServer.processMessage(incoming, s);
         System.out.println(incoming.remoteAddress() + " said: " + s);
     }
 

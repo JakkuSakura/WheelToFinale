@@ -1,8 +1,8 @@
 package server.room;
 
 
-import server.map.GameMap;
-import server.user.Player;
+import server.user.User;
+import shared.map.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Room implements Runnable {
     Status status = Status.WAITING;
     String name;
     GameMap gameMap;
-    List<Player> players = new ArrayList<>();
+    List<User> users = new ArrayList<>();
 
     Thread thread;
     public Room(String name) {
