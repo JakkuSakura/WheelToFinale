@@ -4,14 +4,15 @@
     <root id="root">
       <element id="directory" name="libs">
         <element id="library" level="project" name="nettylibs" />
+        <element id="artifact" artifact-name="shared:jar" />
       </element>
       <element id="archive" name="server.jar">
         <element id="module-output" name="server" />
-        <element id="module-output" name="shared" />
         <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/server/META-INF/MANIFEST.MF" />
+          <element id="file-copy" path="$PROJECT_DIR$/server/src/META-INF/MANIFEST.MF" />
         </element>
       </element>
+      <element id="module-output" name="resources" />
     </root>
   </artifact>
 </component>

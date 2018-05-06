@@ -1,7 +1,6 @@
 package client.message;
 
 
-import jdk.internal.jline.internal.Nullable;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -21,7 +20,6 @@ public class MessagePool {
         return messages.take();
     }
 
-    @Nullable
     public Message top() {
         return messages.peek();
     }
