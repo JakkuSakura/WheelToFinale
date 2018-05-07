@@ -52,7 +52,9 @@ public class GameClient {
         return network;
     }
 
+    public void abord() {
 
+    }
     public static void main(String[] args) throws Exception {
         GameClient gameClient = new GameClient();
         gameClient.run();

@@ -5,6 +5,5 @@
 *.log
 
 /out/
-/client/lwjgl64.dll
-/client/OpenAL64.dll
+*.dll
 

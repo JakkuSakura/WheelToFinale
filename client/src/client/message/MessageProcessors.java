@@ -11,7 +11,7 @@ public class MessageProcessors {
     public MessageProcessors(int threadNum) {
         this.threadNum = threadNum;
         threadPoolExecutor = new ThreadPoolExecutor(0, threadNum,
-                100, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+                100, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 
     }
 
