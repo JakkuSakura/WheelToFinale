@@ -4,10 +4,7 @@
       <root url="file://$PROJECT_DIR$/nettylibs" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/nettylibs" />
-    </SOURCES>
+    <SOURCES />
     <jarDirectory url="file://$PROJECT_DIR$/nettylibs" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/nettylibs" recursive="false" type="SOURCES" />
   </library>
 </component>

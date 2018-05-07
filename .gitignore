@@ -1,5 +1,5 @@
 # Compiled class file
-*.class
+#*.class
 
 # Log file
 *.log
@@ -7,4 +7,4 @@
 /out/
 /client/lwjgl64.dll
 /client/OpenAL64.dll
-!/resources/
+
