@@ -12,7 +12,8 @@
           <element id="file-copy" path="$PROJECT_DIR$/server/src/META-INF/MANIFEST.MF" />
         </element>
       </element>
-      <element id="module-output" name="resources" />
+      <element id="module-output" name="shared-resources" />
+      <element id="module-output" name="server-resources" />
     </root>
   </artifact>
 </component>

@@ -10,11 +10,11 @@
         <element id="module-output" name="shared" />
       </element>
       <element id="directory" name="libs">
-        <element id="library" level="project" name="jmelibs" />
         <element id="library" level="project" name="nettylibs" />
         <element id="artifact" artifact-name="shared:jar" />
       </element>
-      <element id="module-output" name="resources" />
+      <element id="module-output" name="shared-resources" />
+      <element id="module-output" name="client-resources" />
     </root>
   </artifact>
 </component>

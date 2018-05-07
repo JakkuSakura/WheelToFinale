@@ -1,15 +1,21 @@
 <component name="libraryTable">
   <library name="jmelibs">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../jME_SDK/lib" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/lib" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/opt/android" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/opt/jogl" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/opt/native-bullet" />
     </CLASSES>
     <JAVADOC>
-      <root url="file://$PROJECT_DIR$/../jME_SDK/javadoc" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/javadoc" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/../jME_SDK/sources" />
+      <root url="file://$PROJECT_DIR$/jME_SDK/sources" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/../jME_SDK/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../jME_SDK/sources" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/jME_SDK/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/jME_SDK/opt/android" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/jME_SDK/opt/jogl" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/jME_SDK/opt/native-bullet" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/jME_SDK/sources" recursive="false" type="SOURCES" />
   </library>
 </component>

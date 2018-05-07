@@ -36,6 +36,7 @@ public class XMLTool {
 
     }
 
+    @SuppressWarnings("unchecked")
     public static MyXMLType newItem(MyXMLNode node) {
         try {
             Class<? extends MyXMLType> clazz;
@@ -45,7 +46,6 @@ public class XMLTool {
             else {
                 Class cls = Class.forName(node.getXMLType());
                 if (MyXMLType.class.isAssignableFrom(cls))
-                    //noinspection unchecked
                     clazz = cls;
                 else
                     throw new Exception("Your class " + cls.getName() + " is not a subclass of " + MyXMLType.class.getName());

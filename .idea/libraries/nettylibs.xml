@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="nettylibs">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/libs" />
+      <root url="file://$PROJECT_DIR$/nettylibs" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/libs" />
+      <root url="file://$PROJECT_DIR$/nettylibs" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/libs" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/libs" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/nettylibs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/nettylibs" recursive="false" type="SOURCES" />
   </library>
 </component>
