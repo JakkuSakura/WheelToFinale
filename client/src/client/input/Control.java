@@ -1,9 +1,11 @@
 package client.input;
 
+import client.GameClient;
 import com.jme3.input.RawInputListener;
 import com.jme3.input.event.*;
 
 public class Control implements RawInputListener {
+    GameClient client;
     @Override
     public void beginInput() {
 

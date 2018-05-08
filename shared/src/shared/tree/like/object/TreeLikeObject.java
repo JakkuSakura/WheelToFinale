@@ -1,8 +1,8 @@
-package shared.Tools.XMLTool;
+package shared.tree.like.object;
 
-public interface MyXMLType {
+import shared.tools.MyXMLNode;
 
-    Object get();
+public interface TreeLikeObject {
 
     void add(String name, Object obj);
 
@@ -10,5 +10,6 @@ public interface MyXMLType {
 
     Type getType();
 
+    void afterBuilding();
     enum Type {CONTAINER, VLAUE}
 }

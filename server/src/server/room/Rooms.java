@@ -1,26 +1,30 @@
 package server.room;
 
-import java.util.HashMap;
-import java.util.Map;
+import server.events.Reactor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 public class Rooms {
-    private Map<String, Room> rooms = new HashMap<>();
-    public Rooms()
-    {
+    private final List<Room> rooms = new ArrayList<>();
+    private final Reactor reactor;
+
+    public Rooms(ExecutorService threadPool) {
+        reactor = new Reactor(threadPool);
+    }
+
+    public void createRoom(String name) {
+        rooms.add(new Room(name, reactor));
 
     }
-    public void createRoom(String name)
-    {
-        rooms.put(name, new Room(name));
 
-    }
-    public void startRoom(String name)
-    {
+    public void startRoom(Integer name) {
         rooms.get(name).startGame();
 
     }
 
-    public Room getRoom(String roomname) {
-        return rooms.get(roomname);
+    public Room getRoom(Integer roomId) {
+        return rooms.get(roomId);
     }
 }

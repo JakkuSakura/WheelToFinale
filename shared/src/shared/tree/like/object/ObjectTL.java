@@ -1,15 +1,12 @@
-package shared.Tools.XMLTool;
+package shared.tree.like.object;
+
+import shared.tools.MyXMLNode;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyXMLObject implements MyXMLType {
+public class ObjectTL implements TreeLikeObject {
     Map<String, Object> map = new HashMap<>();
-
-    @Override
-    public Object get() {
-        return map;
-    }
 
     @Override
     public void add(String name, Object obj) {
@@ -24,5 +21,10 @@ public class MyXMLObject implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

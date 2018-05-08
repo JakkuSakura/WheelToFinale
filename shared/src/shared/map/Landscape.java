@@ -1,9 +1,9 @@
 package shared.map;
 
-import shared.Tools.XMLTool.MyXMLNode;
-import shared.Tools.XMLTool.MyXMLType;
+import shared.tools.MyXMLNode;
+import shared.tree.like.object.TreeLikeObject;
 
-public class Landscape implements MyXMLType {
+public class Landscape implements TreeLikeObject {
     private Block[][] blokcs;
     private int width;
     private int height;
@@ -18,11 +18,6 @@ public class Landscape implements MyXMLType {
 
     public int getWidth() {
         return width;
-    }
-
-    @Override
-    public Object get() {
-        return this;
     }
 
     @Override
@@ -54,5 +49,10 @@ public class Landscape implements MyXMLType {
     @Override
     public Type getType() {
         return Type.VLAUE;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

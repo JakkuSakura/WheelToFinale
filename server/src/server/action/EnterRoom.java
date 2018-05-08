@@ -1,22 +1,22 @@
 package server.action;
 
 import io.netty.channel.Channel;
-import server.game.GameLogic;
+import server.room.ServerSample;
 import server.user.User;
 
 public class EnterRoom implements GameAction {
-    private GameLogic gameLogic;
+    private ServerSample serverSample;
 
-    public EnterRoom(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public EnterRoom(ServerSample serverSample) {
+        this.serverSample = serverSample;
     }
     @Override
     public void run(Channel incoming, String s) {
         String[] spt = s.split(" ");
-        User u = gameLogic.getUsers().getPlayer("Addr", incoming.remoteAddress());
+        User u = serverSample.getUsers().getPlayer("Addr", incoming.remoteAddress());
         if (u == null)
             return;
-        u.enterRoom(gameLogic.getRooms().getRoom(spt[1]));
+        u.enterRoom(serverSample.getRooms().getRoom(Integer.parseInt(spt[1])));
     }
 
     @Override

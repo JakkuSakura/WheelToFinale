@@ -1,7 +1,8 @@
-package shared.Tools.XMLTool;
+package shared.tools;
 
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+import shared.tree.like.object.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,13 +15,13 @@ import java.util.Optional;
 
 public class XMLTool {
 
-    private static Map<String, Class<? extends MyXMLType>> defaultClassMap = new HashMap<String, Class<? extends MyXMLType>>() {{
-        put("int", MyXMLInteger.class);
-        put("String", MyXMLString.class);
-        put("Array", MyXMLArray.class);
-        put("Object", MyXMLObject.class);
+    private static Map<String, Class<? extends TreeLikeObject>> defaultClassMap = new HashMap<String, Class<? extends TreeLikeObject>>() {{
+        put("int", IntegerTL.class);
+        put("String", StringTL.class);
+        put("Array", ArrayTL.class);
+        put("Object", ObjectTL.class);
     }};
-    private static Map<String, Class<? extends MyXMLType>> xmlClassMap = defaultClassMap;
+    private static Map<String, Class<? extends TreeLikeObject>> xmlClassMap = defaultClassMap;
     private static DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
     public static void putIntoMap(MyXMLNode node, String key, Map<String, Object> map, String errormessage, NodeAction action) {
@@ -37,18 +38,18 @@ public class XMLTool {
     }
 
     @SuppressWarnings("unchecked")
-    public static MyXMLType newItem(MyXMLNode node) {
+    public static TreeLikeObject newItem(MyXMLNode node) {
         try {
-            Class<? extends MyXMLType> clazz;
+            Class<? extends TreeLikeObject> clazz;
 
             if (xmlClassMap.containsKey(node.getXMLType()))
                 clazz = xmlClassMap.get(node.getXMLType());
             else {
                 Class cls = Class.forName(node.getXMLType());
-                if (MyXMLType.class.isAssignableFrom(cls))
+                if (TreeLikeObject.class.isAssignableFrom(cls))
                     clazz = cls;
                 else
-                    throw new Exception("Your class " + cls.getName() + " is not a subclass of " + MyXMLType.class.getName());
+                    throw new Exception("Your class " + cls.getName() + " is not a subclass of " + TreeLikeObject.class.getName());
             }
             return clazz.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
@@ -57,33 +58,33 @@ public class XMLTool {
 
     }
 
-    public static Object readAsTree(MyXMLNode curentNode) {
+    public static TreeLikeObject readAsTree(MyXMLNode curentNode) {
         if (curentNode.getNodeType() == Node.DOCUMENT_NODE)
             return readAsTree(new MyXMLNode(curentNode.getFirstChild()));
 
-        MyXMLType currentXMLType = newItem(curentNode);
+        TreeLikeObject currentXMLType = newItem(curentNode);
 
         curentNode.forEachNode(Node.ELEMENT_NODE, (index, node) -> {
             if (!currentXMLType.check(node))
                 return;
-            MyXMLType childXMLType = newItem(node);
+            TreeLikeObject childXMLType = newItem(node);
             switch (childXMLType.getType()) {
                 case CONTAINER:
                     Optional.ofNullable(readAsTree(node))
                             .ifPresent(t -> {
                                         childXMLType.add(node.getNodeName(), t);
-                                        currentXMLType.add(node.getNodeName(), childXMLType.get());
+                                        currentXMLType.add(node.getNodeName(), childXMLType);
                                     }
                             );
                     break;
                 case VLAUE:
                     childXMLType.add(node.getNodeName(), node.getText());
-                    currentXMLType.add(node.getNodeName(), childXMLType.get());
+                    currentXMLType.add(node.getNodeName(), childXMLType);
                     break;
             }
 
         });
-        return currentXMLType.get();
+        return currentXMLType;
 
 
     }
@@ -97,7 +98,7 @@ public class XMLTool {
 
     }
 
-    public void setXMLClass(Map<String, Class<? extends MyXMLType>> xmlClassMap) {
+    public void setXMLClass(Map<String, Class<? extends TreeLikeObject>> xmlClassMap) {
         if (xmlClassMap != null) {
             XMLTool.xmlClassMap = new HashMap<>(xmlClassMap);
             XMLTool.xmlClassMap.putAll(defaultClassMap);

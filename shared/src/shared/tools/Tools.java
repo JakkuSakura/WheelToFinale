@@ -1,4 +1,4 @@
-package shared.Tools;
+package shared.tools;
 
 import java.lang.reflect.Method;
 

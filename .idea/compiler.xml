@@ -7,15 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="client" />
-        <module name="root" />
-        <module name="server" />
+        <module name="WheelToFinale" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="client" target="8" />
       <module name="jmelibs" target="1.5" />
-      <module name="root" target="1.5" />
       <module name="server" target="8" />
+      <module name="serveraa" target="8" />
+      <module name="WheelToFinale" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

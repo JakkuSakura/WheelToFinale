@@ -1,15 +1,12 @@
-package shared.Tools.XMLTool;
+package shared.tree.like.object;
+
+import shared.tools.MyXMLNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyXMLArray implements MyXMLType {
+public class ArrayTL implements TreeLikeObject {
     List<Object> list = new ArrayList<>();
-
-    @Override
-    public Object get() {
-        return list;
-    }
 
     @Override
     public void add(String name, Object obj) {
@@ -24,5 +21,10 @@ public class MyXMLArray implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

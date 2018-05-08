@@ -1,19 +1,26 @@
 package shared.map;
 
 import org.xml.sax.SAXException;
-import shared.Tools.XMLTool.MyXMLNode;
-import shared.Tools.XMLTool.MyXMLType;
-import shared.Tools.XMLTool.XMLTool;
+import shared.tools.MyXMLNode;
+import shared.tree.like.object.TreeLikeObject;
+import shared.tools.XMLTool;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.Map;
 
-public class GameMap implements MyXMLType {
+public class GameMap implements TreeLikeObject {
     private Map<String, Object> values;
     private String mapname;
 
     private GameMap() {
+    }
+    public static GameMap getEmptyMap(String mapname, int height, int width) {
+        GameMap gameMap = new GameMap();
+        gameMap.mapname = mapname;
+        gameMap.values.put("height", height);
+        gameMap.values.put("width", width);
+        return gameMap;
     }
 
 
@@ -32,10 +39,6 @@ public class GameMap implements MyXMLType {
 
     }
 
-    public static void main(String[] args) {
-        GameMap gameMap = loadMap("maps/demomap.xml");
-
-    }
 
     public Cities getCity() {
         return (Cities) values.get("cities");
@@ -43,18 +46,6 @@ public class GameMap implements MyXMLType {
 
     public Heroes getHeroes() {
         return (Heroes) values.get("heroes");
-    }
-
-
-
-    @Override
-    public Object get() {
-        return this;
-    }
-
-    @Override
-    public void add(String name, Object obj) {
-        values.put(name, obj);
     }
 
     public Landscape getLandscape() {
@@ -70,6 +61,13 @@ public class GameMap implements MyXMLType {
         return this;
     }
 
+
+    @Override
+    public void add(String name, Object obj) {
+        values.put(name, obj);
+    }
+
+
     @Override
     public boolean check(MyXMLNode node) {
         return true;
@@ -78,5 +76,10 @@ public class GameMap implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

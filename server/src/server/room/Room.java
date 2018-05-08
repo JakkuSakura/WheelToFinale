@@ -1,6 +1,7 @@
 package server.room;
 
 
+import server.events.Reactor;
 import server.game.Game;
 import server.user.User;
 import shared.map.GameMap;
@@ -10,16 +11,26 @@ import java.util.List;
 
 
 public class Room {
-    enum Status {WAITING, PLAYING, PAUSED, OVER}
+    public Status getStatus() {
+        return status;
+    }
 
-    Status status = Status.WAITING;
-    String name;
-    GameMap gameMap;
-    Game game = new Game();
-    List<User> users = new ArrayList<>();
+    public String getName() {
+        return name;
+    }
 
-    public Room(String name) {
+    public enum Status {WAITING, PLAYING, PAUSED, OVER}
+
+    private Status status = Status.WAITING;
+    private String name;
+    private GameMap gameMap;
+    private Reactor reactor;
+    private Game game;
+    private List<User> users = new ArrayList<>();
+
+    public Room(String name, Reactor reactor) {
         this.name = name;
+        this.reactor = reactor;
     }
 
     public void loadmap(String mapname) {
@@ -28,6 +39,11 @@ public class Room {
 
     public void startGame() {
         status = Status.PLAYING;
+        game = new Game(reactor, gameMap);
+        game.run();
+    }
 
+    public void stopGame() {
+        game.stopGame();
     }
 }

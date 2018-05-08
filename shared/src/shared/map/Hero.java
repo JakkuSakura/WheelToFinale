@@ -1,11 +1,11 @@
 package shared.map;
 
-import shared.Tools.XMLTool.MyXMLNode;
-import shared.Tools.XMLTool.MyXMLType;
+import shared.tools.MyXMLNode;
+import shared.tree.like.object.TreeLikeObject;
 import shared.player.Player;
 
 
-public class Hero implements MyXMLType {
+public class Hero implements TreeLikeObject {
     private String name;
     private int life;
     private Army army;
@@ -44,11 +44,6 @@ public class Hero implements MyXMLType {
     }
 
     @Override
-    public Object get() {
-        return this;
-    }
-
-    @Override
     public void add(String name, Object obj) {
         switch (name) {
             case "name":
@@ -76,5 +71,10 @@ public class Hero implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

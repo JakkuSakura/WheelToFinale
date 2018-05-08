@@ -1,12 +1,9 @@
-package shared.Tools.XMLTool;
+package shared.tree.like.object;
 
-public class MyXMLInteger implements MyXMLType {
+import shared.tools.MyXMLNode;
+
+public class IntegerTL implements TreeLikeObject {
     int val = Integer.MIN_VALUE;
-
-    @Override
-    public Object get() {
-        return val;
-    }
 
     @Override
     public void add(String name, Object obj) {
@@ -26,5 +23,10 @@ public class MyXMLInteger implements MyXMLType {
     @Override
     public Type getType() {
         return Type.VLAUE;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

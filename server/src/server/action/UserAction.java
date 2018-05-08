@@ -1,22 +1,17 @@
 package server.action;
 
 import io.netty.channel.Channel;
-import server.game.GameLogic;
-import server.user.User;
+import server.room.ServerSample;
 
 public class UserAction implements GameAction {
 
-    private GameLogic gameLogic;
+    private ServerSample serverSample;
 
-    public UserAction(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public UserAction(ServerSample serverSample) {
+        this.serverSample = serverSample;
     }
     @Override
     public void run(Channel incoming, String s) {
-        User u = gameLogic.getUsers().getPlayer("Addr", incoming.remoteAddress());
-        if (u == null)
-            return;
-        gameLogic.receiveMessage(u, s);
     }
 
     @Override

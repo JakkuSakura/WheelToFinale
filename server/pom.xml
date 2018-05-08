@@ -18,7 +18,10 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>jar</packaging>
+    <modules>
+        <module>server</module>
+    </modules>
+    <packaging>pom</packaging>
     <repositories>
         <repository>
             <id>jCenter</id>

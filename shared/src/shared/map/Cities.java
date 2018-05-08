@@ -1,14 +1,14 @@
 package shared.map;
 
-import shared.Tools.XMLTool.MyXMLNode;
-import shared.Tools.XMLTool.MyXMLType;
+import shared.tools.MyXMLNode;
+import shared.tree.like.object.TreeLikeObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class Cities implements MyXMLType {
+public class Cities implements TreeLikeObject {
 
     private final List<City> arrayList = new ArrayList<>();
 
@@ -37,11 +37,6 @@ public class Cities implements MyXMLType {
     }
 
     @Override
-    public Object get() {
-        return this;
-    }
-
-    @Override
     public void add(String name, Object obj) {
         add((City) obj);
     }
@@ -54,6 +49,11 @@ public class Cities implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }
 

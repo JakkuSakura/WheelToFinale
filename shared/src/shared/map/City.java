@@ -1,11 +1,11 @@
 package shared.map;
 
-import shared.Tools.XMLTool.MyXMLNode;
-import shared.Tools.XMLTool.MyXMLType;
+import shared.tools.MyXMLNode;
+import shared.tree.like.object.TreeLikeObject;
 
 import java.util.HashMap;
 
-public class City implements MyXMLType {
+public class City implements TreeLikeObject {
     private final HashMap<String, Object> hashMap = new HashMap<>();
 
     public int size() {
@@ -37,11 +37,6 @@ public class City implements MyXMLType {
     }
 
     @Override
-    public Object get() {
-        return this;
-    }
-
-    @Override
     public void add(String name, Object obj) {
         put(name, obj);
     }
@@ -54,5 +49,10 @@ public class City implements MyXMLType {
     @Override
     public Type getType() {
         return Type.CONTAINER;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

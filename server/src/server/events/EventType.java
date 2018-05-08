@@ -1,3 +1,18 @@
 package server.events;
 
-public enum EventType {GAME_BEGIN, ROUND_END, EVENT_BEGIN, ROUND_BEGIN }
+
+/**
+ * This class is a modified menu class. Compare two by using ==.
+ */
+public class EventType  {
+    public int getValue() {
+        return value;
+    }
+
+    private final int value;
+    protected EventType(int v) {
+        value = v;
+    }
+
+}
+

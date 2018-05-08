@@ -1,19 +1,19 @@
 package server.action;
 
 import io.netty.channel.Channel;
-import server.game.GameLogic;
+import server.room.ServerSample;
 import server.user.User;
 
 public class Login implements GameAction {
-    private GameLogic gameLogic;
+    private ServerSample serverSample;
 
-    public Login(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public Login(ServerSample serverSample) {
+        this.serverSample = serverSample;
     }
     @Override
     public void run(Channel incoming, String s) {
         try {
-            User u = gameLogic.getUsers().login(s);
+            User u = serverSample.getUsers().login(s);
             if (u == null) {
                 incoming.writeAndFlush("Password error\n");
                 return;

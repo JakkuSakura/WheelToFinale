@@ -1,18 +1,18 @@
 package server.action;
 
 import io.netty.channel.Channel;
-import server.game.GameLogic;
+import server.room.ServerSample;
 import server.user.User;
 
 public class Signup implements GameAction {
-    private GameLogic gameLogic;
+    private ServerSample serverSample;
 
-    public Signup(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public Signup(ServerSample serverSample) {
+        this.serverSample = serverSample;
     }
     @Override
     public void run(Channel incoming, String s) {
-        User u = gameLogic.getUsers().signup(s);
+        User u = serverSample.getUsers().signup(s);
         if (u == null) {
             incoming.writeAndFlush("Input error\n");
             return;

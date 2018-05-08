@@ -1,4 +1,4 @@
-package shared.Tools;
+package shared.tools;
 
 public class Compare {
 

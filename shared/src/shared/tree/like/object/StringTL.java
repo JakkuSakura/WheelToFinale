@@ -1,12 +1,9 @@
-package shared.Tools.XMLTool;
+package shared.tree.like.object;
 
-public class MyXMLString implements MyXMLType {
+import shared.tools.MyXMLNode;
+
+public class StringTL implements TreeLikeObject {
     String str;
-
-    @Override
-    public Object get() {
-        return str;
-    }
 
     @Override
     public void add(String name, Object obj) {
@@ -21,5 +18,10 @@ public class MyXMLString implements MyXMLType {
     @Override
     public Type getType() {
         return Type.VLAUE;
+    }
+
+    @Override
+    public void afterBuilding() {
+
     }
 }

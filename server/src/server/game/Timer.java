@@ -1,7 +1,7 @@
 package server.game;
 
 import server.events.Event;
-import server.events.EventType;
+import server.events.GameType;
 import server.events.Reactor;
 
 
@@ -21,27 +21,32 @@ public class Timer implements Runnable {
         this.roundTime = roundTime;
     }
 
-    public int getRoundTime() {
+    public long getRoundTime() {
         return roundTime;
     }
 
-    public void stop() {
+    public long getLastingTimeFromInit() {
+        return currentTime - initTime;
+    }
+
+    public long getLastingTimeFromRound() {
+        return currentTime - beginTime;
     }
 
     @Override
     public void run() {
-        initTime = System.currentTimeMillis();
+        currentTime = initTime = System.currentTimeMillis();
 
-        reactor.sendEvent(new Event(EventType.GAME_BEGIN));
+        reactor.sendEvent(new Event(GameType.GAME_BEGIN));
         while (game.isRunning()) {
             beginTime = System.currentTimeMillis();
-            reactor.sendEvent(new Event(EventType.ROUND_BEGIN));
+            reactor.sendEvent(new Event(GameType.ROUND_BEGIN));
             while (game.isRunning() && currentTime - beginTime < roundTime) {
                 currentTime = System.currentTimeMillis();
             }
-            reactor.sendEvent(new Event(EventType.ROUND_END));
+            reactor.sendEvent(new Event(GameType.ROUND_END));
         }
-        reactor.sendEvent(new Event(EventType.EVENT_BEGIN));
+        reactor.sendEvent(new Event(GameType.EVENT_BEGIN));
 
     }
 }

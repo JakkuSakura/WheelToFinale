@@ -3,24 +3,32 @@ package server.events;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.*;
 
-public class Reactor {
-    private Map<EventType, PriorityBlockingQueue<EventHandler>> handlers = new HashMap<>();
-
-    public Reactor() {
-        for (EventType type : EventType.values()) {
-            handlers.put(type, new PriorityBlockingQueue<>());
-        }
+public class Reactor<T extends EventType> {
+    private final Map<T, BlockingQueue<EventHandler>> handlers = new HashMap<>();
+    private final BlockingQueue<Event> eventQueue = new PriorityBlockingQueue<>();
+    private final ExecutorService threadPoolExecutor;
+    public Reactor(ExecutorService threadPoolExecutor) {
+        this.threadPoolExecutor = threadPoolExecutor;
     }
 
-    public void addHandler(EventType type, EventHandler handler) {
-        handlers.get(type).add(handler);
+    public void addHandler(T type, EventHandler handler) {
+        if (!getHandlers().containsKey(type))
+            getHandlers().put(type, new PriorityBlockingQueue<>());
+        getHandlers().get(type).add(handler);
     }
-    public void addAllHandler(List<EventType> typeList, EventHandler handler) {
-        typeList.forEach(eventType -> handlers.get(eventType).put(handler));
+
+    public Map<T, BlockingQueue<EventHandler>> getHandlers() {
+        return handlers;
     }
+
+    public void addAllHandler(List<T> typeList, EventHandler handler) {
+        typeList.forEach(eventType -> addHandler(eventType, handler));
+    }
+
     public void sendEvent(Event event) {
-        handlers.get(event.getType()).forEach(handler -> handler.handler(event));
+        eventQueue.add(event);
     }
+
 }

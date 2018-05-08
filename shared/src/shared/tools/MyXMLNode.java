@@ -1,4 +1,4 @@
-package shared.Tools.XMLTool;
+package shared.tools;
 
 import org.w3c.dom.*;
 
