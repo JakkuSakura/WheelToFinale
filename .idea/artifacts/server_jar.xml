@@ -9,7 +9,7 @@
       <element id="archive" name="server.jar">
         <element id="module-output" name="server" />
         <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/server/src/main/java/META-INF/MANIFEST.MF" />
+          <element id="file-copy" path="$PROJECT_DIR$/server/src/META-INF/MANIFEST.MF" />
         </element>
       </element>
       <element id="module-output" name="shared-resources" />

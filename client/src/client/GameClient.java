@@ -1,27 +1,27 @@
 package client;
 
+import client.game.Games;
 import client.input.Control;
-import client.message.Message;
-import client.message.MessagePools;
-import client.message.MessageProcessor;
-import client.message.MessageProcessors;
+import client.message.*;
 import client.network.Network;
-import client.output.Display;
-import client.output.Sounds;
-import client.tools.*;
+import client.display.Display;
+import client.sounds.Sounds;
 
 public class GameClient {
     private Control control = new Control();
     private MessagePools messagePools = new MessagePools();
-    private MessageProcessors messageProcessors = new MessageProcessors(10);
     private Sounds sounds = new Sounds();
     private Display display = new Display(control);
-    private Manager manager = new Manager();
+    private Games games = new Games(this);
+    private MessageProcessor messageProcessor = new MessageProcessor();
     private Network network = new Network("0.0.0.0", 8888);
+    private boolean isRunning = false;
+
     public void run() throws Exception {
+        isRunning = true;
         display.start();
-        network.autoConnect(1000);
-        messageProcessors.addProcessor(new MessageProcessor(messagePools.getMessagePool(Message.Type.GAME), manager));
+        network.start();
+        waitForStop();
     }
 
     GameClient() {
@@ -40,8 +40,8 @@ public class GameClient {
         return messagePools;
     }
 
-    public Manager getManager() {
-        return manager;
+    public MessageProcessor getMessageProcessor() {
+        return messageProcessor;
     }
 
     public Sounds getSounds() {
@@ -52,12 +52,36 @@ public class GameClient {
         return network;
     }
 
-    public void abord() {
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void cleanup() {
 
     }
+
+    public void stop() {
+        isRunning = false;
+        network.stopNetwork();
+    }
+
+    public void waitForStop() {
+        try {
+            while (!isRunning) {
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+
+        } finally {
+            cleanup();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
+
         GameClient gameClient = new GameClient();
         gameClient.run();
+
     }
 
 }

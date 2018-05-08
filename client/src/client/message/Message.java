@@ -1,16 +1,21 @@
 package client.message;
 
 public class Message {
-    String msg;
+    private String msg;
     private Type type;
     private int from;
-    Message() {
+
+    public Message() {
         type = Type.NONE;
     }
-    Message(Type type, int from, String msg) {
+    public Message(Type type, int from, String msg) {
         this.type = type;
         this.from = from;
         this.msg = msg;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public enum Type{NONE, GAME}

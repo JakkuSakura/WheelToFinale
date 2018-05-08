@@ -1,4 +1,4 @@
-package client.output;
+package client.display;
 
 import client.input.Control;
 import com.jme3.app.SimpleApplication;
@@ -11,6 +11,7 @@ public class Display extends SimpleApplication {
 
     public Display(Control control) {
         this.control = control;
+
     }
 
     @Override
@@ -42,6 +43,7 @@ public class Display extends SimpleApplication {
         //TODO: add update code
     }
 
+    //TODO: Doubtful
     @Override
     public void simpleRender(RenderManager rm) {
         control.receiveKeydown(rm);

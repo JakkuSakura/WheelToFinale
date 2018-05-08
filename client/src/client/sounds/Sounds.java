@@ -1,4 +1,4 @@
-package client.output;
+package client.sounds;
 
 public class Sounds {
 }

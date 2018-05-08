@@ -10,37 +10,39 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 
-public class Network {
+public class Network extends Thread {
     private String host;
     private int port;
-
+    EventLoopGroup group = new NioEventLoopGroup();
+    Bootstrap bootstrap = new Bootstrap();
+    private boolean isRunning;
+    Channel channel;
+    int delay = 1000;
     public Network(String host, int port) {
         this.host = host;
         this.port = port;
+        bootstrap
+                .group(group)
+                .channel(NioSocketChannel.class)
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel arg0) {
+                        ChannelPipeline pipeline = arg0.pipeline();
+                        pipeline.addLast(new StringDecoder());
+                        pipeline.addLast(new StringEncoder());
+                        pipeline.addLast(new LengthFieldPrepender(2));
+                        pipeline.addLast(new GameClientControl());
+//                          pipeline.addLast(new HeartBeatReqHandler());
+                    }
+                });
+
     }
 
 
     public void connect() {
-        EventLoopGroup group = new NioEventLoopGroup();
+        isRunning = true;
         try {
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap
-                    .group(group)
-                    .channel(NioSocketChannel.class)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel arg0) {
-                            ChannelPipeline pipeline = arg0.pipeline();
-                            pipeline.addLast(new StringDecoder());
-                            pipeline.addLast(new StringEncoder());
-                            pipeline.addLast(new LengthFieldPrepender(2));
-                            pipeline.addLast(new GameClientControl());
-//                          pipeline.addLast(new HeartBeatReqHandler());
-                        }
-                    });
-
-            ChannelFuture f = bootstrap.connect(host, port).sync();
-            Channel channel = f.channel();
+            channel = bootstrap.connect(host, port).sync().channel();
             channel.closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,12 +51,32 @@ public class Network {
         }
     }
 
-    public void autoConnect(int delay) throws Exception {
-        while (true) {
-            connect();
-            Thread.sleep(delay);
+    public void stopNetwork() {
+        isRunning = false;
+        channel.close();
+    }
+
+    public void cleanup() {
+
+    }
+
+    public void autoConnect() throws Exception {
+        try {
+            while (isRunning) {
+                connect();
+                Thread.sleep(delay);
+            }
+        }finally {
+            cleanup();
         }
     }
 
-
+    @Override
+    public void run() {
+        try {
+            autoConnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
