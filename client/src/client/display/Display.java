@@ -16,6 +16,7 @@ public class Display extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        inputManager.addRawInputListener(control);
 //        Box b = new Box(1, 1, 1);
 //        Geometry geom = new Geometry("Box");
 //
@@ -46,7 +47,7 @@ public class Display extends SimpleApplication {
     //TODO: Doubtful
     @Override
     public void simpleRender(RenderManager rm) {
-        control.receiveKeydown(rm);
+
     }
 
 

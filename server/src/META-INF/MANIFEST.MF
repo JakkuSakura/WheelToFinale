@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Class-Path: libs/gson-2.2.2.jar libs/log4j-1.2.16.jar libs/jetlang-0.2
+ .9.jar libs/aopalliance-1.0.jar libs/slf4j-api-1.6.1.jar libs/slf4j-l
+ og4j12-1.6.1.jar libs/jcl-over-slf4j-1.7.2.jar libs/netty-all-4.1.22.
+ Final.jar libs/blazeds-core-3.2.0.3978.jar libs/spring-aop-3.2.2.RELE
+ ASE.jar libs/blazeds-common-3.2.0.3978.jar libs/spring-core-3.2.2.REL
+ EASE.jar libs/spring-beans-3.2.2.RELEASE.jar libs/backport-util-concu
+ rrent-3.1.jar libs/spring-context-3.2.2.RELEASE.jar libs/netty-all-4.
+ 1.22.Final-sources.jar libs/spring-expression-3.2.2.RELEASE.jar libs/
+ shared.jar
+Main-Class: server.GameServer
+
