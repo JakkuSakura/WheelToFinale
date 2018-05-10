@@ -11,7 +11,7 @@ import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-public class ServerNetwork implements NetworkImp {
+public class ServerNetwork {
     private int port;
     EventLoopGroup bossGroup = new NioEventLoopGroup();
     EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -48,6 +48,9 @@ public class ServerNetwork implements NetworkImp {
             bossGroup.shutdownGracefully();
 
         }
+    }
+    public void sendMessage(Channel channel, String data) {
+        channel.writeAndFlush(data+"\r\n");
     }
 
 

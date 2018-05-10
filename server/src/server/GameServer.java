@@ -1,26 +1,51 @@
 package server;
 
-import server.events.Reactor;
+import server.gamecenter.GameCenter;
 import server.network.NetworkControl;
 import server.network.ServerNetwork;
-import server.room.ServerSample;
+import server.user.UserManager;
+import shared.events.Reactor;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class GameServer {
-    private final ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(10);
-    private final NetworkControl serverControl = new NetworkControl(threadPoolExecutor);
+    private final ThreadPoolExecutor networkThreadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(10);
+    private final ThreadPoolExecutor gameThreadPool = (ThreadPoolExecutor)Executors.newCachedThreadPool();
+    private final Reactor reactor = new Reactor(networkThreadPool);
+    private final NetworkControl serverControl = new NetworkControl(networkThreadPool, reactor);
     private final ServerNetwork network = new ServerNetwork(8080, serverControl);
-    private final Reactor reactor = new Reactor(threadPoolExecutor);
-    private final ServerSample serverSample = new ServerSample(threadPoolExecutor);
+    private final UserManager userManager = new UserManager();
+    private final GameCenter gameCenter = new GameCenter(gameThreadPool);
 
-    public ServerSample getServerSample() {
-        return serverSample;
+    public GameServer() {
+    }
+
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public GameCenter getGameCenter() {
+        return gameCenter;
     }
 
     public void run() throws Exception {
         network.run();
+    }
+
+    public ServerNetwork getNetwork() {
+        return network;
+    }
+
+    public void stooServer() throws InterruptedException {
+        networkThreadPool.shutdown();
+        networkThreadPool.awaitTermination(30, TimeUnit.SECONDS);
+        networkThreadPool.shutdownNow();
+
+        gameThreadPool.shutdown();
+        gameThreadPool.awaitTermination(30, TimeUnit.SECONDS);
+        gameThreadPool.shutdownNow();
 
     }
 

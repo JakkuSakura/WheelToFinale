@@ -2,7 +2,7 @@ package server.user;
 
 
 import io.netty.channel.Channel;
-import server.room.Room;
+import server.gamecenter.Room;
 
 import java.net.SocketAddress;
 import java.util.HashMap;

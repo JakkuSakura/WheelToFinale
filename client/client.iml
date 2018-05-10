@@ -12,7 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="shared" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.jmonkeyengine:jme3-core:3.2.1-stable" level="project" />
     <orderEntry type="library" name="Maven: org.jmonkeyengine:jme3-desktop:3.2.1-stable" level="project" />
     <orderEntry type="library" name="Maven: org.jmonkeyengine:jme3-lwjgl:3.2.1-stable" level="project" />

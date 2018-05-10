@@ -1,9 +1,9 @@
 package server.game;
 
-import server.events.Event;
-import server.events.EventHandler;
-import server.events.Reactor;
-import shared.map.GameMap;
+import shared.events.Event;
+import shared.events.SimpleEventHandler;
+import shared.events.Reactor;
+import shared.element.GameMap;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -39,31 +39,10 @@ public class Game {
     }
 }
 
-class GameInitHandler extends EventHandler {
+class GameInitHandlerSimple extends SimpleEventHandler {
 
     @Override
-    public void handler(Event event) {
+    public void handler(Event GameType) {
 
     }
 }
-//class GameInitHandler extends EventHandler {
-//
-//    @Override
-//    public void handler(Event event) {
-//
-//    }
-//}
-//class GameInitHandler extends EventHandler {
-//
-//    @Override
-//    public void handler(Event event) {
-//
-//    }
-//}
-//class GameInitHandler extends EventHandler {
-//
-//    @Override
-//    public void handler(Event event) {
-//
-//    }
-//}
