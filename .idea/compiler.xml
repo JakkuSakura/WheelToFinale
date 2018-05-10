@@ -10,12 +10,6 @@
         <module name="server" />
         <module name="shared" />
       </profile>
-      <profile name="Annotation profile for WheelToFinale" enabled="true">
-        <sourceOutputDir name="server/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="server/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="WheelToFinale" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="client" target="8" />

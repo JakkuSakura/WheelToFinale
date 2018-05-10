@@ -39,7 +39,7 @@
         </repository>
     </repositories>
     <modules>
-        <module>main.java.client</module>
+        <module>client</module>
         <module>server</module>
     </modules>
 
