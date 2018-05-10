@@ -46,6 +46,6 @@ Class-Path: libs/gson-2.2.2.jar libs/log4j-1.2.16.jar libs/jetlang-0.2
  jar libs/gluegen-rt-natives-windows-amd64.jar libs/jogl-all-natives-a
  ndroid-aarch64.jar libs/jogl-all-natives-macosx-universal.jar libs/gl
  uegen-rt-natives-android-aarch64.jar libs/gluegen-rt-natives-macosx-u
- niversal.jar libs/shared.jar
-Main-Class: client.GameClient
+ niversal.jar libs/main.java.shared.jar
+Main-Class: main.java.client.GameClient
 

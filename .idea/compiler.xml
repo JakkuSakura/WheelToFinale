@@ -7,15 +7,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="client" />
+        <module name="server" />
+        <module name="shared" />
+      </profile>
+      <profile name="Annotation profile for WheelToFinale" enabled="true">
+        <sourceOutputDir name="server/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="server/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
         <module name="WheelToFinale" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="client" target="8" />
+      <module name="client-resources" target="1.5" />
       <module name="jmelibs" target="1.5" />
       <module name="server" target="8" />
+      <module name="server-resources" target="1.5" />
       <module name="serveraa" target="8" />
-      <module name="WheelToFinale" target="1.5" />
+      <module name="shared" target="1.5" />
+      <module name="shared-resources" target="1.5" />
+      <module name="WheelToFinale" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
