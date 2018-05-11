@@ -1,9 +1,9 @@
-package main.java.server.eventhandler;
+package server.eventhandler;
 
 import io.netty.channel.Channel;
-import main.java.server.GameServer;
-import main.java.server.network.NetworkEvent;
-import main.java.server.user.User;
+import server.GameServer;
+import server.network.NetworkEvent;
+import server.user.User;
 
 public class Login extends NetworkHandler {
     private GameServer gameServer;

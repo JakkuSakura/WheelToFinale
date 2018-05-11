@@ -1,6 +1,6 @@
-package main.java.client.input;
+package client.input;
 
-import main.java.client.GameClient;
+import client.GameClient;
 import com.jme3.input.RawInputListener;
 import com.jme3.input.event.*;
 

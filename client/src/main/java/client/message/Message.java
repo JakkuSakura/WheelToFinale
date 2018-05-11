@@ -1,4 +1,4 @@
-package main.java.client.message;
+package client.message;
 
 public class Message {
     private String msg;

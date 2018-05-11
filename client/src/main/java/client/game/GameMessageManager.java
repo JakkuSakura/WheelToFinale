@@ -1,4 +1,4 @@
-package main.java.client.game;
+package client.game;
 
 public class GameMessageManager {
 }

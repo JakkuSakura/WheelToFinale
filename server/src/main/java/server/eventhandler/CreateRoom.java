@@ -1,7 +1,7 @@
-package main.java.server.eventhandler;
+package server.eventhandler;
 
-import main.java.server.GameServer;
-import main.java.server.network.NetworkEvent;
+import server.GameServer;
+import server.network.NetworkEvent;
 
 public class CreateRoom extends NetworkHandler {
     private GameServer gameServer;

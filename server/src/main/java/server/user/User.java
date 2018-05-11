@@ -1,8 +1,8 @@
-package main.java.server.user;
+package server.user;
 
 
 import io.netty.channel.Channel;
-import main.java.server.gamecenter.Room;
+import server.gamecenter.Room;
 
 import java.net.SocketAddress;
 import java.util.HashMap;

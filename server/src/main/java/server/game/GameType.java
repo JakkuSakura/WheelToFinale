@@ -1,6 +1,6 @@
-package main.java.server.game;
+package server.game;
 
-import main.java.shared.events.EventType;
+import shared.events.EventType;
 
 import java.util.HashMap;
 import java.util.Map;

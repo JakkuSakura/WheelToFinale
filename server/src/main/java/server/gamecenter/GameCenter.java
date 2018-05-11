@@ -1,6 +1,7 @@
-package main.java.server.gamecenter;
+package server.gamecenter;
 
-import main.java.shared.events.Reactor;
+
+import shared.events.Reactor;
 
 import java.util.ArrayList;
 import java.util.List;

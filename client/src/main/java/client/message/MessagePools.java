@@ -1,4 +1,4 @@
-package main.java.client.message;
+package client.message;
 
 import java.util.HashMap;
 import java.util.Map;

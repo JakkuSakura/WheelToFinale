@@ -1,11 +1,11 @@
-package main.java.server.gamecenter;
+package server.gamecenter;
 
 
-import main.java.server.game.GameType;
-import main.java.shared.events.Reactor;
-import main.java.server.game.Game;
-import main.java.server.user.User;
-import main.java.shared.element.GameMap;
+import server.game.GameType;
+import shared.events.Reactor;
+import server.game.Game;
+import server.user.User;
+import shared.element.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;

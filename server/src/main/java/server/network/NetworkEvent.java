@@ -1,11 +1,12 @@
-package main.java.server.network;
+package server.network;
 
 import io.netty.channel.Channel;
+import shared.events.Event;
 
-public class NetworkEvent extends main.java.shared.events.Event {
+public class NetworkEvent extends Event {
     private Channel channel;
     private String data;
-    public NetworkEvent(NetworkType type, Channel channel) {
+    public NetworkEvent(server.network.NetworkType type, Channel channel) {
         super(type, channel.toString());
         this.channel = channel;
     }

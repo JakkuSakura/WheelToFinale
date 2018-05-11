@@ -1,12 +1,11 @@
-package main.java.client;
+package client;
 
-import main.java.client.game.Games;
-import main.java.client.input.Control;
-import main.java.client.message.*;
-import main.java.client.network.Network;
-import main.java.client.display.Display;
-import main.java.client.sounds.Sounds;
-
+import client.game.Games;
+import client.input.Control;
+import client.message.*;
+import client.network.Network;
+import client.display.Display;
+import client.sounds.Sounds;
 public class GameClient {
     private Control control = new Control();
     private MessagePools messagePools = new MessagePools();

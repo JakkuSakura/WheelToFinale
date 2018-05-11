@@ -1,8 +1,8 @@
-package main.java.client.game;
+package client.game;
 
-import main.java.client.GameClient;
-import main.java.client.message.Message;
-import main.java.client.message.MessageManager;
+import client.GameClient;
+import client.message.Message;
+import client.message.MessageManager;
 
 public class Games {
     private MessageManager messageManager;

@@ -1,6 +1,5 @@
-package main.java.server.network;
-
-import main.java.shared.events.EventType;
+package server.network;
+import shared.events.EventType;
 
 import java.util.HashMap;
 import java.util.Map;

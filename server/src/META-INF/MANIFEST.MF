@@ -7,6 +7,6 @@ Class-Path: libs/gson-2.2.2.jar libs/log4j-1.2.16.jar libs/jetlang-0.2
  EASE.jar libs/spring-beans-3.2.2.RELEASE.jar libs/backport-util-concu
  rrent-3.1.jar libs/spring-context-3.2.2.RELEASE.jar libs/netty-all-4.
  1.22.Final-sources.jar libs/spring-expression-3.2.2.RELEASE.jar libs/
- main.java.shared.jar
-Main-Class: main.java.server.GameServer
+ shared.jar
+Main-Class: server.GameServer
 

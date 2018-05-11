@@ -1,4 +1,4 @@
-package main.java.client.network;
+package client.network;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;

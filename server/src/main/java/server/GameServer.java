@@ -1,16 +1,17 @@
-package main.java.server;
+package server;
 
+import server.gamecenter.GameCenter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import main.java.server.gamecenter.GameCenter;
-import main.java.server.network.NetworkControl;
-import main.java.server.network.ServerNetwork;
-import main.java.server.user.UserManager;
-import main.java.shared.events.Reactor;
+import server.network.NetworkControl;
+import server.network.ServerNetwork;
+import server.user.UserManager;
+import shared.events.Reactor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 
 public class GameServer {
     private final ThreadPoolExecutor networkThreadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(10);

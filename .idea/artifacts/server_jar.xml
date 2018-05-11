@@ -19,8 +19,6 @@
         </element>
         <element id="module-output" name="server" />
       </element>
-      <element id="module-output" name="shared-resources" />
-      <element id="module-output" name="server-resources" />
     </root>
   </artifact>
 </component>

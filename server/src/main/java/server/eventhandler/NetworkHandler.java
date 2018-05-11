@@ -1,9 +1,9 @@
-package main.java.server.eventhandler;
+package server.eventhandler;
 
-import main.java.server.network.NetworkEvent;
-import main.java.shared.events.Event;
-import main.java.shared.events.Priority;
-import main.java.shared.events.SimpleEventHandler;
+import server.network.NetworkEvent;
+import shared.events.Event;
+import shared.events.Priority;
+import shared.events.SimpleEventHandler;
 
 public abstract class NetworkHandler extends SimpleEventHandler {
     private final String name;

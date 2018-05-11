@@ -1,9 +1,9 @@
-package main.java.server.eventhandler;
+package server.eventhandler;
 
 import io.netty.channel.Channel;
-import main.java.server.GameServer;
-import main.java.server.network.NetworkEvent;
-import main.java.server.user.User;
+import server.user.User;
+import server.GameServer;
+import server.network.NetworkEvent;
 
 public class EnterRoom extends NetworkHandler {
     private GameServer gameServer;
@@ -20,7 +20,7 @@ public class EnterRoom extends NetworkHandler {
         User u = gameServer.getUserManager().getPlayer("Addr", channel.remoteAddress());
         if (u == null)
             return;
-        u.enterRoom(gameServer.getGameCenter().getRoom(Integer.parseInt(spt[1])));
+        //u.enterRoom(gameServer.getGameCenter().getRoom(Integer.parseInt(spt[1])));
     }
 
 }

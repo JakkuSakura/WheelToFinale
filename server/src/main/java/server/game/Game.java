@@ -1,9 +1,9 @@
-package main.java.server.game;
+package server.game;
 
-import main.java.shared.events.Event;
-import main.java.shared.events.SimpleEventHandler;
-import main.java.shared.events.Reactor;
-import main.java.shared.element.GameMap;
+import shared.element.GameMap;
+import shared.events.Event;
+import shared.events.Reactor;
+import shared.events.SimpleEventHandler;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;

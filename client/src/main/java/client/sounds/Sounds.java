@@ -1,4 +1,4 @@
-package main.java.client.sounds;
+package client.sounds;
 
 public class Sounds {
 }

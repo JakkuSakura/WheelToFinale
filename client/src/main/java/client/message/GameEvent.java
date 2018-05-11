@@ -1,4 +1,4 @@
-package main.java.client.message;
+package client.message;
 
 public class GameEvent {
     public enum Type{NONE, VIEW, CCONTROL, DATA}

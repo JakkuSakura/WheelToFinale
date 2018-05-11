@@ -1,7 +1,6 @@
-package main.java.server.network;
-
+package server.network;
 import io.netty.channel.Channel;
-import main.java.server.eventhandler.NetworkHandler;
+import server.eventhandler.NetworkHandler;
 
 public class ReadFromXML extends NetworkHandler {
 

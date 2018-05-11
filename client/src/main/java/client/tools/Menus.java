@@ -1,4 +1,4 @@
-package main.java.client.tools;
+package client.tools;
 
 public class Menus {
 }

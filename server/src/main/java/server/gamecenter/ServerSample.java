@@ -1,4 +1,4 @@
-package main.java.server.gamecenter;
+package server.gamecenter;
 
 public class ServerSample {
 

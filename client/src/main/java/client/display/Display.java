@@ -1,6 +1,6 @@
-package main.java.client.display;
+package client.display;
 
-import main.java.client.input.Control;
+import client.input.Control;
 import com.jme3.app.SimpleApplication;
 import com.jme3.light.DirectionalLight;
 import com.jme3.light.PointLight;

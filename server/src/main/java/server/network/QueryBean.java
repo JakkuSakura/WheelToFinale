@@ -1,5 +1,4 @@
-package main.java.server.network;
-
+package server.network;
 public class QueryBean {
     /**
      * userId = your userId

@@ -1,10 +1,11 @@
-package main.java.server.game;
+package server.game;
 
-import main.java.shared.events.Event;
-import main.java.shared.events.Reactor;
+import shared.events.Event;
+import shared.events.Reactor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 
 
 public class Timer implements Runnable {
