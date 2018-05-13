@@ -11,14 +11,16 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 public class ServerNetwork {
-    private int port;
-    EventLoopGroup bossGroup = new NioEventLoopGroup();
-    EventLoopGroup workerGroup = new NioEventLoopGroup();
-    ServerBootstrap b = new ServerBootstrap();
+    private final int port;
+    private final NetworkControl networkControl;
+    private final EventLoopGroup bossGroup = new NioEventLoopGroup();
+    private final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private final ServerBootstrap b = new ServerBootstrap();
 
     public ServerNetwork(int port, NetworkControl networkControl) {
 
         this.port = port;
+        this.networkControl = networkControl;
         b.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -49,10 +51,9 @@ public class ServerNetwork {
 
         }
     }
-    public void sendMessage(Channel channel, String data) {
-        channel.writeAndFlush(data+"\r\n");
+
+
+    public NetworkControl getNetworkControl() {
+        return networkControl;
     }
-
-
-
 }

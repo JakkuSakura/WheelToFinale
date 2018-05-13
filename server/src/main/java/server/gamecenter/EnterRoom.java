@@ -1,11 +1,11 @@
-package server.eventhandler;
+package server.gamecenter;
 
 import io.netty.channel.Channel;
-import server.user.User;
 import server.GameServer;
-import server.network.NetworkEvent;
+import server.network.NetworkStringEvent;
+import server.user.User;
 
-public class EnterRoom extends NetworkHandler {
+public class EnterRoom extends NetworkHandler<NetworkStringEvent> {
     private GameServer gameServer;
 
     public EnterRoom(GameServer gameServer) {
@@ -13,7 +13,7 @@ public class EnterRoom extends NetworkHandler {
         this.gameServer = gameServer;
     }
     @Override
-    public void handler(NetworkEvent network) {
+    public void handler(NetworkStringEvent network) {
         Channel channel = network.getChannel();
         String s = network.getData();
         String[] spt = s.split(" ");

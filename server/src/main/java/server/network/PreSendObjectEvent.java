@@ -1,11 +1,23 @@
 package server.network;
 
-import shared.events.Event;
-import shared.events.EventType;
+import io.netty.channel.Channel;
 
-public class PreSendObjectEvent extends Event {
-    public PreSendObjectEvent(EventType type) {
-        super(NetworkType.SEND_DATA);
+
+public class PreSendObjectEvent extends NetworkEvent {
+    public PreSendObjectEvent(Channel channel) {
+        super(NetworkType.SEND_DATA, channel);
+    }
+    private Object object;
+
+    public PreSendObjectEvent() {
+        this(null);
     }
 
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
 }

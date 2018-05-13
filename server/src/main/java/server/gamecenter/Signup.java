@@ -1,11 +1,11 @@
-package server.eventhandler;
+package server.gamecenter;
 
 import io.netty.channel.Channel;
-import server.user.User;
 import server.GameServer;
-import server.network.NetworkEvent;
+import server.network.NetworkStringEvent;
+import server.user.User;
 
-public class Signup extends NetworkHandler {
+public class Signup extends NetworkHandler<NetworkStringEvent> {
     private GameServer gameServer;
 
     public Signup(GameServer gameServer) {
@@ -14,14 +14,14 @@ public class Signup extends NetworkHandler {
     }
 
     @Override
-    public void handler(NetworkEvent networkEvent) {
+    public void handler(NetworkStringEvent networkEvent) {
         Channel incoming = networkEvent.getChannel();
         User u = gameServer.getUserManager().signup(networkEvent.getData());
         if (u == null) {
-            gameServer.getNetwork().sendMessage(incoming, "InputError");
+            incoming.writeAndFlush("InputError" +"\r\n");
             return;
         }
-        gameServer.getNetwork().sendMessage(incoming, "Ok");
+        incoming.writeAndFlush("Ok" +"\r\n");
     }
 
 }

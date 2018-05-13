@@ -1,11 +1,11 @@
-package server.eventhandler;
+package server.gamecenter;
 
 import server.network.NetworkEvent;
 import shared.events.Event;
 import shared.events.Priority;
 import shared.events.SimpleEventHandler;
 
-public abstract class NetworkHandler extends SimpleEventHandler {
+public abstract class NetworkHandler<T extends NetworkEvent> extends SimpleEventHandler {
     private final String name;
 
     public NetworkHandler() {
@@ -23,15 +23,17 @@ public abstract class NetworkHandler extends SimpleEventHandler {
         return name;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void handler(Event event) {
-        if (event instanceof NetworkEvent) {
-            NetworkEvent converted = (NetworkEvent) event;
+        try {
+            T converted = (T) event;
             handler(converted);
+        } catch (ClassCastException e) {
+            throw new RuntimeException("Event cannot be converted" + event.toString());
+
         }
-        else
-            throw new RuntimeException("Event should be NetworkEvent:" + event.toString());
     }
 
-    public abstract void handler(NetworkEvent networkEvent);
+    public abstract void handler(T networkEvent);
 }

@@ -23,6 +23,8 @@ public class Display extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+//        todo do not work
+//        settings.setTitle("Wheel to finale");
         inputManager.addRawInputListener(control);
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box");

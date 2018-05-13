@@ -1,9 +1,9 @@
-package server.eventhandler;
+package server.gamecenter;
 
 import server.GameServer;
-import server.network.NetworkEvent;
+import server.network.NetworkStringEvent;
 
-public class CreateRoom extends NetworkHandler {
+public class CreateRoom extends NetworkHandler<NetworkStringEvent> {
     private GameServer gameServer;
 
     public CreateRoom(GameServer gameServer) {
@@ -12,7 +12,7 @@ public class CreateRoom extends NetworkHandler {
     }
 
     @Override
-    public void handler(NetworkEvent networkEvent) {
+    public void handler(NetworkStringEvent networkEvent) {
         String[] spt = networkEvent.getData().split(" ");
         if (gameServer.getUserManager().getPlayer("Addr", networkEvent.getChannel().remoteAddress()) != null)
             gameServer.getGameCenter().createRoom(spt[1]);
