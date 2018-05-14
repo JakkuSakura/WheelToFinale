@@ -4,9 +4,8 @@ import io.netty.channel.Channel;
 
 public class NetworkStringEvent extends NetworkEvent {
 
-
-    public NetworkStringEvent(NetworkType type, Channel channel) {
-        super(type, channel);
+    public NetworkStringEvent(Channel channel) {
+        super(channel);
     }
 
     private String data;

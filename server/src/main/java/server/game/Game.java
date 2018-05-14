@@ -2,8 +2,7 @@ package server.game;
 
 import shared.element.GameMap;
 import shared.events.Event;
-import shared.events.Reactor;
-import shared.events.SimpleEventHandler;
+import shared.reactor.Reactor;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -36,13 +35,5 @@ public class Game {
 
     public void stopGame() {
         isRunning = false;
-    }
-}
-
-class GameInitHandlerSimple extends SimpleEventHandler {
-
-    @Override
-    public void handler(Event GameType) {
-
     }
 }

@@ -1,5 +1,8 @@
-package server.gamecenter;
-public class QueryCommand {
+package server.network;
+
+import shared.events.Event;
+
+public class CommonQueryObject extends Event {
     /**
      * userId = your userId
      * roomNumber =

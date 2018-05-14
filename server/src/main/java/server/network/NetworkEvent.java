@@ -5,8 +5,7 @@ import shared.events.Event;
 
 public class NetworkEvent extends Event {
     private Channel channel;
-    public NetworkEvent(NetworkType type, Channel channel) {
-        super(type, channel.toString());
+    public NetworkEvent(Channel channel) {
         this.channel = channel;
     }
 

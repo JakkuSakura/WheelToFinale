@@ -1,43 +1,16 @@
 package server.gamecenter;
 
 import server.GameServer;
-import server.network.PreSendObjectEvent;
+import server.network.CommonQueryObject;
+import shared.events.Event;
+import shared.reactor.Chain;
+import shared.reactor.SimpleEventHandler;
 
-public class Query {
+public class Query extends SimpleEventHandler<CommonQueryObject> {
     private GameServer gameServer;
 
     public Query(GameServer gameServer) {
         this.gameServer = gameServer;
-    }
-
-
-    void parser(Object object) {
-        if (object instanceof QueryCommand) {
-            QueryCommand queryCommand = (QueryCommand) object;
-            //TODO check if user valid
-            switch (queryCommand.getOperation()) {
-                case "Update":
-
-                    break;
-                case "Query":
-                    switch (queryCommand.getRoomNumber()) {
-                        case -1: {
-                            ServerInfo serverInfo = getServerInfo();
-                            PreSendObjectEvent preSendObjectEvent = new PreSendObjectEvent();
-                            preSendObjectEvent.setObject(serverInfo);
-                            break;
-                        }
-                        case -2: {
-                            GameCenterInfo gameCenterInfo = getGameCenterInfo();
-                            PreSendObjectEvent preSendObjectEvent = new PreSendObjectEvent();
-                            preSendObjectEvent.setObject(gameCenterInfo);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 
     private GameCenterInfo getGameCenterInfo() {
@@ -47,4 +20,17 @@ public class Query {
     private ServerInfo getServerInfo() {
         return new ServerInfo();
     }
+
+    @Override
+    public boolean check(Event event) {
+//        return ;
+//        todo
+        return true;
+    }
+
+    @Override
+    public void handler_0(Chain chain, CommonQueryObject event) {
+
+    }
+
 }

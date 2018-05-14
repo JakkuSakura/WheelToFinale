@@ -1,7 +1,7 @@
 package server.game;
 
 import shared.events.Event;
-import shared.events.Reactor;
+import shared.reactor.Reactor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,10 +44,10 @@ public class Timer implements Runnable {
     public void run() {
         currentTime = initTime = System.currentTimeMillis();
 
-        reactor.sendEvent(new Event(GameType.GAME_BEGIN));
+        reactor.submitEvent(new Event());
         while (game.isRunning()) {
             beginTime = System.currentTimeMillis();
-            reactor.sendEvent(new Event(GameType.ROUND_BEGIN));
+            reactor.submitEvent(new Event());
             while (game.isRunning() && currentTime - beginTime < roundTime) {
                 currentTime = System.currentTimeMillis();
                 try {
@@ -56,9 +56,9 @@ public class Timer implements Runnable {
                     game.stopGame();
                 }
             }
-            reactor.sendEvent(new Event(GameType.ROUND_END));
+            reactor.submitEvent(new Event());
         }
-        reactor.sendEvent(new Event(GameType.EVENT_BEGIN));
+        reactor.submitEvent(new Event());
 
     }
 }

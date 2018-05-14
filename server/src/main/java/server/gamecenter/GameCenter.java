@@ -1,7 +1,7 @@
 package server.gamecenter;
 
 
-import shared.events.Reactor;
+import shared.reactor.Reactor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class GameCenter {
     private final Reactor reactor;
 
     public GameCenter(ExecutorService threadPool) {
-        reactor = new Reactor(threadPool);
+        reactor = new Reactor();
     }
 
     public void createRoom(String name) {

@@ -1,11 +1,10 @@
 package server.gamecenter;
 
 
-import server.game.GameType;
-import shared.events.Reactor;
 import server.game.Game;
 import server.user.User;
 import shared.element.GameMap;
+import shared.reactor.Reactor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Room {
 
     public Room(String name, Reactor reactor) {
         this.name = name;
-        reactor.addSubReactor(GameType.EVENT_MAP.values(), this.reactor);
+
     }
 
     public void loadmap(String mapname) {

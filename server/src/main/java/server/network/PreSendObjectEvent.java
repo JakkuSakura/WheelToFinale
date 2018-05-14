@@ -5,7 +5,7 @@ import io.netty.channel.Channel;
 
 public class PreSendObjectEvent extends NetworkEvent {
     public PreSendObjectEvent(Channel channel) {
-        super(NetworkType.SEND_DATA, channel);
+        super(channel);
     }
     private Object object;
 

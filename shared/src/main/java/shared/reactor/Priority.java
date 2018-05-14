@@ -1,4 +1,4 @@
-package shared.events;
+package shared.reactor;
 
 public class Priority implements Comparable<Priority> {
     public static final Priority LOW = Priority.of(0);

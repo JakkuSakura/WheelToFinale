@@ -5,44 +5,42 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
 
 public class ServerNetwork {
-    private final int port;
-    private final NetworkControl networkControl;
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
-    private final ServerBootstrap b = new ServerBootstrap();
+    private final ServerBootstrap serverBootstrap = new ServerBootstrap();
+    private final int port;
 
-    public ServerNetwork(int port, NetworkControl networkControl) {
+    public ServerNetwork(int port, MessagePusher pusher) {
 
         this.port = port;
-        this.networkControl = networkControl;
-        b.group(bossGroup, workerGroup)
+        serverBootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-                        pipeline.addLast("decoder", new StringDecoder());
-                        pipeline.addLast("encoder", new StringEncoder());
-                        pipeline.addLast("handler", networkControl);
+                        //添加对象系列化编解码器,同时提供粘包拆包支持
+                        pipeline.addLast(new LengthFieldBasedFrameDecoder(65535, 0, 2, 0, 2));
+                        pipeline.addLast("decoder", new MessageDecoder());
+
+                        pipeline.addLast(new LengthFieldPrepender(2));
+                        pipeline.addLast("encoder", new MessageEncoder());
+
+                        pipeline.addLast("handler", pusher);
 
                     }
                 }).option(ChannelOption.SO_BACKLOG, 128)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
-
-
     }
 
     public void run() throws Exception {
         try {
             // 绑定端口，开始接收进来的连接
-            ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = serverBootstrap.bind(port).sync();
             f.channel().closeFuture().sync();
 
         } finally {
@@ -50,10 +48,5 @@ public class ServerNetwork {
             bossGroup.shutdownGracefully();
 
         }
-    }
-
-
-    public NetworkControl getNetworkControl() {
-        return networkControl;
     }
 }
