@@ -1,15 +1,16 @@
-package server.network;
+package shared.network;
 
 import io.netty.channel.Channel;
 
 
-public class PreSendObjectEvent extends NetworkEvent {
-    public PreSendObjectEvent(Channel channel) {
+public class SendObjectEvent extends NetworkEvent {
+
+    public SendObjectEvent(Channel channel) {
         super(channel);
     }
     private Object object;
 
-    public PreSendObjectEvent() {
+    public SendObjectEvent() {
         this(null);
     }
 

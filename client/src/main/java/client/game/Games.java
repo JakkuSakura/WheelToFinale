@@ -1,16 +1,20 @@
 package client.game;
 
-import client.GameClient;
-import client.message.Message;
-import client.message.MessageManager;
+import client.message.GameEvent;
+import shared.reactor.Reactor;
 
 public class Games {
-    private MessageManager messageManager;
-    private GameClient gameClient;
+
+    private Reactor reactor = new Reactor();
     private int roomId;
-    public Games(GameClient client) {
-        this.gameClient = client;
-        this.messageManager = new MessageManager(client.getMessagePools().getMessagePool(Message.Type.GAME));
+
+    public Games(Reactor reactor) {
+        this.reactor.setParentReactor(reactor);
+        reactor.addSubReactor(GameEvent.class, this.reactor);
+    }
+
+    public Reactor getReactor() {
+        return reactor;
     }
 
 }

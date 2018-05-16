@@ -1,30 +1,54 @@
 package client;
 
+import client.display.Display;
 import client.game.Games;
 import client.input.Control;
-import client.message.*;
-import client.network.Network;
-import client.display.Display;
+import client.network.ClientNetwork;
 import client.sounds.Sounds;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import shared.events.ConvertOptional;
+import shared.events.Event;
+import shared.events.HelloMessage;
+import shared.network.MessagePusher;
+import shared.network.ReceiveObjectEvent;
+import shared.reactor.Chain;
+import shared.reactor.EventHandler;
+import shared.reactor.Reactor;
+
 public class GameClient {
-    private Control control = new Control();
-    private MessagePools messagePools = new MessagePools();
+    private Reactor reactor = new Reactor();
+    private Control control = new Control(reactor);
     private Sounds sounds = new Sounds();
     private Display display = new Display(control);
-    private Games games = new Games(this);
-    private MessageProcessor messageProcessor = new MessageProcessor();
-    private Network network = new Network("0.0.0.0", 8888);
+    private Games games = new Games(reactor);
+    private ClientNetwork clientNetwork = new ClientNetwork("0.0.0.0", 8888, new MessagePusher(reactor));
+    private Logger logger = LogManager.getRootLogger();
     private boolean isRunning = false;
 
     public void run() throws Exception {
+        logger.info("Running client");
         isRunning = true;
-        display.start();
-        network.start();
+        clientNetwork.start();
+//        display.start();
         waitForStop();
     }
 
     GameClient() {
+        reactor.addHandler(ReceiveObjectEvent.class, new EventHandler() {
+            @Override
+            public void handler(Chain chain, Event event) {
+                ReceiveObjectEvent receiveObjectEvent = event.convert(ReceiveObjectEvent.class).get();
+                HelloMessage helloMessage = (HelloMessage) receiveObjectEvent.getObject();
+                System.out.println(helloMessage.getString());
+            }
 
+            @Override
+            public boolean check(Event event) {
+                ConvertOptional<Object> object = event.convert(ReceiveObjectEvent.class).map(ReceiveObjectEvent::getObject);
+                return object.convert(HelloMessage.class).isPresent();
+            }
+        });
     }
 
     public Control getControl() {
@@ -35,20 +59,17 @@ public class GameClient {
         return display;
     }
 
-    public MessagePools getMessagePools() {
-        return messagePools;
+    public Reactor getReactor() {
+        return reactor;
     }
 
-    public MessageProcessor getMessageProcessor() {
-        return messageProcessor;
-    }
 
     public Sounds getSounds() {
         return sounds;
     }
 
-    public Network getNetwork() {
-        return network;
+    public ClientNetwork getClientNetwork() {
+        return clientNetwork;
     }
 
     public boolean isRunning() {
@@ -61,15 +82,16 @@ public class GameClient {
 
     public void stop() {
         isRunning = false;
-        network.stopNetwork();
+        clientNetwork.stopNetwork();
     }
 
     public void waitForStop() {
+        logger.info("Waiting for stop");
         try {
-            while (!isRunning) {
+            while (isRunning()) {
                 Thread.sleep(1000);
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
 
         } finally {
             cleanup();

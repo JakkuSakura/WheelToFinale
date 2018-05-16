@@ -10,6 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+import com.jme3.system.AppSettings;
 
 
 public class Display extends SimpleApplication {
@@ -18,14 +19,16 @@ public class Display extends SimpleApplication {
 
     public Display(Control control) {
         this.control = control;
+        AppSettings settings = new AppSettings(true);
+        settings.setTitle("Wheel to Finale");
+        setSettings(settings);
 
     }
 
     @Override
     public void simpleInitApp() {
-//        todo do not work
-//        settings.setTitle("Wheel to finale");
-        inputManager.addRawInputListener(control);
+
+        inputManager.addListener(control);
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box");
 
@@ -49,7 +52,6 @@ public class Display extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-        //TODO: add update code
     }
 
     @Override

@@ -2,7 +2,7 @@ import org.junit.Test;
 import shared.events.Event;
 import shared.reactor.Chain;
 import shared.reactor.Reactor;
-import shared.reactor.SimpleEventHandler;
+import shared.reactor.EventHandler;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,14 +12,14 @@ public class ReactorTest {
     public void newReactor() {
         final int[] val = {0};
         Reactor reactor = new Reactor();
-        SimpleEventHandler<Event> handler = new SimpleEventHandler<Event>() {
+        EventHandler handler = new EventHandler() {
             @Override
             public boolean check(Event event) {
                 return true;
             }
 
             @Override
-            public void handler_0(Chain chain, Event event) {
+            public void handler(Chain chain, Event event) {
                 val[0] += 1;
             }
         };

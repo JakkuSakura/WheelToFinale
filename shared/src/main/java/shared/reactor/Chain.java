@@ -29,7 +29,7 @@ public class Chain {
     public void run(Event event) {
         stopNext = false;
         for(EventHandler handler : eventHandlers) {
-//            if (handler.check(event))
+            //checked
             handler.handler(this, event);
             if (stopNext)
                 break;

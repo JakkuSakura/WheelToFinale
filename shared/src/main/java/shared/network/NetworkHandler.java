@@ -1,9 +1,9 @@
-package server.network;
+package shared.network;
 
 import shared.reactor.Priority;
-import shared.reactor.SimpleEventHandler;
+import shared.reactor.EventHandler;
 
-public abstract class NetworkHandler<T extends NetworkEvent> extends SimpleEventHandler<T> {
+public abstract class NetworkHandler<T extends NetworkEvent> extends EventHandler {
     private final String name;
 
     public NetworkHandler() {

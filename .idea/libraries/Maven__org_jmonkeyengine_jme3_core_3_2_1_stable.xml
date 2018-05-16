@@ -8,6 +8,21 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/jmonkeyengine/jme3-core/3.2.1-stable/jme3-core-3.2.1-stable-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-android-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-blender-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-bullet-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-core-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-desktop-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-effects-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-ios-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-jbullet-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-jogg-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-jogl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-lwjgl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-networking-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-niftygui-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-plugins-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jME_SDK/sources/jme3-terrain-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

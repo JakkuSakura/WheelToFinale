@@ -1,16 +1,9 @@
 package client.message;
 
-public class GameEvent {
-    public enum Type{NONE, VIEW, CCONTROL, DATA}
-    Type type = Type.NONE;
+import shared.events.Event;
 
-    public void setType(Type type) {
-        if (type == null)
-            type = Type.NONE;
-        this.type = type;
-    }
+public class GameEvent extends Event {
+    public GameEvent() {
 
-    public Type getType() {
-        return type;
     }
 }

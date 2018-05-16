@@ -5,8 +5,13 @@ import shared.events.Event;
 import java.util.Objects;
 
 public abstract class EventHandler implements Comparable<EventHandler> {
+
     private Priority level = Priority.MEDIUM;
-    private EventHandler nextHandler;
+
+    public abstract void handler(Chain chain, Event event);
+
+    public abstract boolean check(Event event);
+
     public Priority getLevel() {
         return level;
     }
@@ -17,10 +22,6 @@ public abstract class EventHandler implements Comparable<EventHandler> {
 
     public int compareTo(EventHandler o) {
         return Objects.requireNonNull(o, "EventHandler cannot be null")
-                .getLevel().compareTo((o).getLevel());
+                .getLevel().compareTo(this.getLevel());
     }
-
-    public abstract void handler(Chain chain, Event event);
-
-    public abstract boolean check(Event event);
 }

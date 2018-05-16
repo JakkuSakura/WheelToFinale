@@ -1,4 +1,4 @@
-package server.network;
+package shared.network;
 
 import io.netty.channel.Channel;
 

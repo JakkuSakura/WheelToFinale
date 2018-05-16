@@ -13,4 +13,9 @@ public class Event implements Cloneable {
             throw new RuntimeException(e);
         }
     }
+
+
+    public <T extends Event> ConvertOptional<T> convert(Class<T> convert) {
+        return ConvertOptional.of(this).convert(convert);
+    }
 }

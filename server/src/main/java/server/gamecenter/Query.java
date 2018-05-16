@@ -1,12 +1,11 @@
 package server.gamecenter;
 
 import server.GameServer;
-import server.network.CommonQueryObject;
 import shared.events.Event;
 import shared.reactor.Chain;
-import shared.reactor.SimpleEventHandler;
+import shared.reactor.EventHandler;
 
-public class Query extends SimpleEventHandler<CommonQueryObject> {
+public class Query extends EventHandler {
     private GameServer gameServer;
 
     public Query(GameServer gameServer) {
@@ -29,7 +28,7 @@ public class Query extends SimpleEventHandler<CommonQueryObject> {
     }
 
     @Override
-    public void handler_0(Chain chain, CommonQueryObject event) {
+    public void handler(Chain chain, Event event) {
 
     }
 
