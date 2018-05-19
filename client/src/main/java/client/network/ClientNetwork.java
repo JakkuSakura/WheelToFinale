@@ -16,7 +16,7 @@ public class ClientNetwork extends Thread {
     private Bootstrap bootstrap = new Bootstrap();
     private boolean isRunning = true;
     private Channel channel;
-    private int delay = 1000;
+    private int delay = 10000;
     private final Logger logger = LogManager.getRootLogger();
     public ClientNetwork(String host, int port, MessagePusher pusher) {
         logger.info("Init ClinetNetwork");

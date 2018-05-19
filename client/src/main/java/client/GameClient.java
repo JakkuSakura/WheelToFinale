@@ -29,8 +29,8 @@ public class GameClient {
     public void run() throws Exception {
         logger.info("Running client");
         isRunning = true;
-        clientNetwork.start();
-//        display.start();
+//        clientNetwork.start();
+        display.start();
         waitForStop();
     }
 
