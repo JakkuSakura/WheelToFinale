@@ -1,9 +1,14 @@
 package client.coordinate;
 
 import com.jme3.math.Vector3f;
+
 public class GpsCoordinate {
     private float longitude, latitude, altitude;
     private Vector3f vector3f;
+
+    public GpsCoordinate() {
+        this(0, 0, 0);
+    }
 
     public GpsCoordinate(float longitude, float latitude, float altitude) {
         this.longitude = longitude;
@@ -23,13 +28,26 @@ public class GpsCoordinate {
         return longitude;
     }
 
-    public static double toRad(float degree) {
-        return Math.PI * degree / 180.0;
+    public static float toRad(float degree) {
+        return (float) Math.PI * degree / 180.0f;
+    }
+
+    public static float toDegree(float rad) {
+        return rad * 180.0f / (float) Math.PI;
+    }
+
+    public static float toRad(double degree) {
+        return toRad((float) degree);
+    }
+
+    public static float toDegree(double rad) {
+        return toDegree((float) rad);
     }
 
 
     /**
      * using left-handed coordinate
+     *
      * @return a Vector3f with x,y,z sized between +1.0 and -1.0
      */
     public Vector3f getVector3f() {
@@ -41,10 +59,27 @@ public class GpsCoordinate {
 
     public Vector3f calcVector3f() {
         float y = (float) Math.sin(toRad(latitude));
-        float x = (float) Math.cos(toRad(longitude)) * Math.abs(y);
-        float z = (float) Math.sin(toRad(longitude)) * Math.abs(y);
+        float x = (float) Math.cos(toRad(longitude)) * (float) Math.cos(latitude);
+        float z = (float) Math.sin(toRad(longitude)) * (float) Math.cos(latitude);
 
         return new Vector3f(x, y, z);
+    }
+
+    public GpsCoordinate fromVector3f(Vector3f normalized) {
+        latitude = toDegree(Math.asin(normalized.y));
+        longitude = toDegree(Math.atan(normalized.z / normalized.x));
+        if (normalized.z < 0)
+            longitude -= 180.0f;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "GpsCoordinate[" +
+                longitude +
+                ", " +
+                latitude +
+                "]";
     }
 
 }

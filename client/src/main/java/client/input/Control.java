@@ -2,29 +2,50 @@ package client.input;
 
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
+import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.input.controls.Trigger;
 import shared.reactor.Reactor;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class Control implements ActionListener {
     private Reactor reactor;
-    private static final String UP = "UP";
-    private static final String DOWN = "DOWN";
-    private static final String LEFT = "LEFT";
-    private static final String RIGHT = "RIGHT";
-    private static final String SPACE = "SPACE";
+    public static final String UP = "UP";
+    public static final String DOWN = "DOWN";
+    public static final String LEFT = "LEFT";
+    public static final String RIGHT = "RIGHT";
+    public static final String SPACE = "SPACE";
+    public static final String LMB = "LMB";
+    public static final String RMB = "RMB";
+    public static final Map<String, Trigger> map = new HashMap<String, Trigger>() {
+        {
+            put(UP, new KeyTrigger(KeyInput.KEY_UP));
+            put(DOWN, new KeyTrigger(KeyInput.KEY_DOWN));
+            put(LEFT, new KeyTrigger(KeyInput.KEY_LEFT));
+            put(RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT));
+            put(SPACE, new KeyTrigger(KeyInput.KEY_SPACE));
+            put(LMB, new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+            put(RMB, new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
+        }
+    };
 
-    private void initKeys(InputManager inputManager) {
-        // You can map one or several inputs to one named action
-        inputManager.addMapping(UP, new KeyTrigger(KeyInput.KEY_UP));
-        inputManager.addMapping(DOWN, new KeyTrigger(KeyInput.KEY_DOWN));
-        inputManager.addMapping(LEFT, new KeyTrigger(KeyInput.KEY_LEFT));
-        inputManager.addMapping(RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT));
-        inputManager.addMapping(SPACE, new KeyTrigger(KeyInput.KEY_SPACE));
-
-        // Add the names to the action listener.
-        inputManager.addListener(this, UP, DOWN, LEFT, RIGHT, SPACE);
+    public void initKeys(InputManager inputManager) {
+        map.forEach(inputManager::addMapping);
+        inputManager.addListener(this, map.keySet().toArray(new String[0]));
+//
+//        // You can map one or several inputs to one named action
+//        inputManager.addMapping(UP, new KeyTrigger(KeyInput.KEY_UP));
+//        inputManager.addMapping(DOWN, new KeyTrigger(KeyInput.KEY_DOWN));
+//        inputManager.addMapping(LEFT, new KeyTrigger(KeyInput.KEY_LEFT));
+//        inputManager.addMapping(RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT));
+//        inputManager.addMapping(SPACE, new KeyTrigger(KeyInput.KEY_SPACE));
+//
+//        // Add the names to the action listener.
+//        inputManager.addListener(this, UP, DOWN, LEFT, RIGHT, SPACE);
 
     }
 
@@ -34,8 +55,10 @@ public class Control implements ActionListener {
 
     @Override
     public void onAction(String name, boolean isPressed, float tpf) {
+        if (!isPressed)
+            return;
+        System.out.println(name);
         KeyEvent.Keys key;
-
         switch (name) {
             case UP:
                 key = KeyEvent.Keys.UP;
@@ -52,6 +75,12 @@ public class Control implements ActionListener {
             case SPACE:
                 key = KeyEvent.Keys.SPACE;
                 break;
+            case LMB:
+                key = KeyEvent.Keys.LMB;
+                break;
+            case RMB:
+                key = KeyEvent.Keys.RMB;
+                break;
             default:
                 key = KeyEvent.Keys.NONE;
                 break;
@@ -59,6 +88,10 @@ public class Control implements ActionListener {
         }
 
         reactor.submitEvent(new KeyEvent(key));
+    }
+
+    public Reactor getReactor() {
+        return reactor;
     }
 }
 

@@ -2,18 +2,16 @@ package client.display;
 
 import client.coordinate.GpsCoordinate;
 import com.jme3.asset.AssetManager;
-import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 
-public class EarthMatter{
-    private AssetManager assetManager;
+public class EarthMatter implements Action{
     private GpsCoordinate gpsCoordinate;
     private String assetPath;
-    private Geometry geometry;
-    public EarthMatter(AssetManager assetManager, GpsCoordinate gpsCoordinate, String assetPath, float r) {
-        this.assetManager = assetManager;
+    private Spatial spatial;
+    public EarthMatter(AssetManager assetManager, GpsCoordinate gpsCoordinate, String assetPath) {
+        this.spatial = assetManager.loadModel(assetPath);
         this.gpsCoordinate = gpsCoordinate;
         this.assetPath = assetPath;
-        geometry = (Geometry) assetManager.loadModel(assetPath);
     }
 
     public GpsCoordinate getGpsCoordinate() {
@@ -23,7 +21,6 @@ public class EarthMatter{
     public void setGpsCoordinate(GpsCoordinate gpsCoordinate) {
         this.gpsCoordinate = gpsCoordinate;
     }
-
     public String getAssetPath() {
         return assetPath;
     }
@@ -32,11 +29,12 @@ public class EarthMatter{
         this.assetPath = assetPath;
     }
 
-    public Geometry getGeometry() {
-        return geometry;
+    public Spatial getSpatial() {
+        return spatial;
     }
 
-    public void setGeometry(Geometry geometry) {
-        this.geometry = geometry;
+    @Override
+    public void action(EventManager.Type type) {
+
     }
 }
