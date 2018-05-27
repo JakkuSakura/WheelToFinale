@@ -1,5 +1,7 @@
-package client.display;
+package client.display.models;
 
+import client.display.event.Action;
+import client.display.event.EventMapper;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -36,8 +38,8 @@ public class Earth extends Node implements Action {
     }
 
     @Override
-    public void action(EventManager.Type type) {
-        if (type == EventManager.Type.SELECT) {
+    public void action(EventMapper.Type type) {
+        if (type == EventMapper.Type.SELECT) {
             System.out.println(this);
             setLocalScale(getLocalScale().add(0.1f, 0.1f, 0.1f));
         }

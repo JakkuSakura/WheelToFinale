@@ -1,7 +1,11 @@
-package client.display;
+package client.display.appstate;
 
 
 import client.coordinate.GpsCoordinate;
+import client.display.models.Earth;
+import client.display.models.EarthMatter;
+import client.display.event.EventMapper;
+import client.display.models.City;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
@@ -17,18 +21,18 @@ public class EarthAppstate extends BaseAppState{
 
 
     private AssetManager assetManager;
-    private EventManager eventManager;
+    private EventMapper eventMapper;
 
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
+    public void setEventMapper(EventMapper eventMapper) {
+        this.eventMapper = eventMapper;
     }
 
     public AssetManager getAssetManager() {
         return assetManager;
     }
 
-    public EventManager getEventManager() {
-        return eventManager;
+    public EventMapper getEventMapper() {
+        return eventMapper;
     }
 
     public Earth getEarth() {
@@ -51,8 +55,8 @@ public class EarthAppstate extends BaseAppState{
 
         earth = new Earth(assetManager, radius);
         EarthMatter earthMatter = new City(assetManager, new GpsCoordinate());
-        if (getEventManager() != null) {
-            getEventManager().register(EventManager.Type.SELECT, earth, earth);
+        if (getEventMapper() != null) {
+            getEventMapper().register(EventMapper.Type.SELECT, earth, earth);
         }
         earth.addModel(earthMatter);
         rootNode.attachChild(earth);

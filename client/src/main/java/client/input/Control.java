@@ -36,16 +36,7 @@ public class Control implements ActionListener {
     public void initKeys(InputManager inputManager) {
         map.forEach(inputManager::addMapping);
         inputManager.addListener(this, map.keySet().toArray(new String[0]));
-//
-//        // You can map one or several inputs to one named action
-//        inputManager.addMapping(UP, new KeyTrigger(KeyInput.KEY_UP));
-//        inputManager.addMapping(DOWN, new KeyTrigger(KeyInput.KEY_DOWN));
-//        inputManager.addMapping(LEFT, new KeyTrigger(KeyInput.KEY_LEFT));
-//        inputManager.addMapping(RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT));
-//        inputManager.addMapping(SPACE, new KeyTrigger(KeyInput.KEY_SPACE));
-//
-//        // Add the names to the action listener.
-//        inputManager.addListener(this, UP, DOWN, LEFT, RIGHT, SPACE);
+
 
     }
 
@@ -81,6 +72,7 @@ public class Control implements ActionListener {
             case RMB:
                 key = KeyEvent.Keys.RMB;
                 break;
+
             default:
                 key = KeyEvent.Keys.NONE;
                 break;

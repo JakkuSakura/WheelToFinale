@@ -1,4 +1,4 @@
-package client.display;
+package client.display.appstate;
 
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;

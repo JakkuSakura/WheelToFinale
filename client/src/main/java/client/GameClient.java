@@ -1,17 +1,15 @@
 package client;
 
-import client.display.Display;
+import client.display.GameApp;
+import client.display.event.ExitEvent;
 import client.game.Games;
 import client.input.Control;
 import client.network.ClientNetwork;
 import client.sounds.Sounds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import shared.events.ConvertOptional;
 import shared.events.Event;
-import shared.events.HelloMessage;
 import shared.network.MessagePusher;
-import shared.network.ReceiveObjectEvent;
 import shared.reactor.Chain;
 import shared.reactor.EventHandler;
 import shared.reactor.Reactor;
@@ -20,7 +18,7 @@ public class GameClient {
     private Reactor reactor = new Reactor();
     private Control control = new Control(reactor);
     private Sounds sounds = new Sounds();
-    private Display display = new Display(control);
+    private GameApp gameApp = new GameApp(control);
     private Games games = new Games(reactor);
     private ClientNetwork clientNetwork = new ClientNetwork("0.0.0.0", 8888, new MessagePusher(reactor));
     private Logger logger = LogManager.getRootLogger();
@@ -29,24 +27,34 @@ public class GameClient {
     public void run() throws Exception {
         logger.info("Running client");
         isRunning = true;
-//        clientNetwork.start();
-        display.start();
-        waitForStop();
+        clientNetwork.start();
+        gameApp.start();
     }
 
-    GameClient() {
-        reactor.addHandler(ReceiveObjectEvent.class, new EventHandler() {
+    public GameClient() {
+//        reactor.addHandler(ReceiveObjectEvent.class, new EventHandler() {
+//            @Override
+//            public void handler(Chain chain, Event event) {
+//                ReceiveObjectEvent receiveObjectEvent = event.convert(ReceiveObjectEvent.class).get();
+//                HelloMessage helloMessage = (HelloMessage) receiveObjectEvent.getObject();
+//                System.out.println(helloMessage.getString());
+//            }
+//
+//            @Override
+//            public boolean check(Event event) {
+//                ConvertOptional<Object> object = event.convert(ReceiveObjectEvent.class).map(ReceiveObjectEvent::getObject);
+//                return object.convert(HelloMessage.class).isPresent();
+//            }
+//        });
+    reactor.addHandler(ExitEvent.class, new EventHandler() {
             @Override
             public void handler(Chain chain, Event event) {
-                ReceiveObjectEvent receiveObjectEvent = event.convert(ReceiveObjectEvent.class).get();
-                HelloMessage helloMessage = (HelloMessage) receiveObjectEvent.getObject();
-                System.out.println(helloMessage.getString());
+                stop();
             }
 
             @Override
             public boolean check(Event event) {
-                ConvertOptional<Object> object = event.convert(ReceiveObjectEvent.class).map(ReceiveObjectEvent::getObject);
-                return object.convert(HelloMessage.class).isPresent();
+                return event instanceof ExitEvent;
             }
         });
     }
@@ -55,8 +63,8 @@ public class GameClient {
         return control;
     }
 
-    public Display getDisplay() {
-        return display;
+    public GameApp getGameApp() {
+        return gameApp;
     }
 
     public Reactor getReactor() {
@@ -77,12 +85,11 @@ public class GameClient {
     }
 
     public void cleanup() {
-
+        clientNetwork.stopNetwork();
     }
 
     public void stop() {
         isRunning = false;
-        clientNetwork.stopNetwork();
     }
 
     public void waitForStop() {
@@ -102,7 +109,7 @@ public class GameClient {
 
         GameClient gameClient = new GameClient();
         gameClient.run();
-
+        gameClient.waitForStop();
     }
 
 }

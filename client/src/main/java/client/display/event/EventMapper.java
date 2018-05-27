@@ -1,18 +1,18 @@
-package client.display;
+package client.display.event;
 
 import com.jme3.scene.Spatial;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventManager {
+public class EventMapper {
     public enum Type {
         SELECT
     }
 
     private Map<Type, Map<Spatial, Action>> map = new HashMap<>();
 
-    public EventManager() {
+    public EventMapper() {
 
     }
 

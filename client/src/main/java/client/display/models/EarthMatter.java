@@ -1,10 +1,12 @@
-package client.display;
+package client.display.models;
 
 import client.coordinate.GpsCoordinate;
+import client.display.event.Action;
+import client.display.event.EventMapper;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Spatial;
 
-public class EarthMatter implements Action{
+public class EarthMatter implements Action {
     private GpsCoordinate gpsCoordinate;
     private String assetPath;
     private Spatial spatial;
@@ -34,7 +36,7 @@ public class EarthMatter implements Action{
     }
 
     @Override
-    public void action(EventManager.Type type) {
+    public void action(EventMapper.Type type) {
 
     }
 }

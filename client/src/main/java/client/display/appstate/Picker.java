@@ -1,6 +1,7 @@
-package client.display;
+package client.display.appstate;
 
 
+import client.display.event.EventMapper;
 import client.input.KeyEvent;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -85,7 +86,7 @@ public abstract class Picker extends BaseAppState {
         }
     }
 
-    public void setReactor(Reactor reactor, EventManager eventManager) {
+    public void setReactor(Reactor reactor, EventMapper eventMapper) {
         this.reactor = reactor;
         reactor.addHandler(KeyEvent.class, new EventHandler() {
             @Override
@@ -94,7 +95,7 @@ public abstract class Picker extends BaseAppState {
                 System.out.println(pickResult.size());
                 if (pickResult.size() > 0) {
                     Geometry geom = pickResult.getClosestCollision().getGeometry();
-                    eventManager.trigger(EventManager.Type.SELECT, geom);
+                    eventMapper.trigger(EventMapper.Type.SELECT, geom);
                 }
             }
 
