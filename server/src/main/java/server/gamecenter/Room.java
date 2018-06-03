@@ -34,7 +34,7 @@ public class Room {
     }
 
     public void loadmap(String mapname) {
-        this.gameMap = GameMap.loadMap(mapname);
+//        this.gameMap = GameMap.loadMap(mapname);
     }
 
     public void startGame() {
@@ -45,5 +45,9 @@ public class Room {
 
     public void stopGame() {
         game.stopGame();
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

@@ -24,8 +24,7 @@ public class Game {
 
     public void run() {
         this.isRunning = true;
-        new Thread(timer).start();
-        //rough
+        reactor.submitEvent(new TimerEvent(timer));
     }
 
     public Reactor getReactor() {

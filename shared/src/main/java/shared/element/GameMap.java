@@ -1,5 +1,9 @@
 package shared.element;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 public class GameMap {
@@ -17,10 +21,12 @@ public class GameMap {
     }
 
 
-    public static GameMap loadMap(String filename) {
-  //TODO
+    public static GameMap loadMap(String filename) throws IOException {
+        File file = new File(filename);
+        InputStream inputStream = new FileInputStream(file);
+//        byte[] bytes = inputStream.readAllBytes();
+//        GameMap map = SerializeUtil.deserializer(bytes);
         return (GameMap) null;
-
     }
 
 

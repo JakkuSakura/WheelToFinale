@@ -55,7 +55,7 @@ public class Reactor extends EventHandler {
         handlers.get(eventClass).remove(eventHandler);
     }
 
-    @SuppressWarnings("unchecked")
+
     public void submitEvent(Event event) {
         Chain chain = new Chain(this);
         handlers.forEach((k, v) -> {
