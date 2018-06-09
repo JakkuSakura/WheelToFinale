@@ -1,6 +1,6 @@
 package client.display.event;
 
-import shared.events.Event;
+import base.events.Event;
 
 public class ExitEvent extends Event {
 }

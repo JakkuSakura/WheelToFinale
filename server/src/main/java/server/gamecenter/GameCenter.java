@@ -5,10 +5,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.game.TimerAdder;
 import server.game.TimerEvent;
-import shared.events.Event;
-import shared.reactor.Chain;
-import shared.reactor.EventHandler;
-import shared.reactor.Reactor;
+import base.events.Event;
+import base.reactor.Chain;
+import base.reactor.EventHandler;
+import base.reactor.Reactor;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package server.game;
 
-import shared.element.GameMap;
-import shared.events.Event;
-import shared.reactor.Reactor;
+import base.element.GameMap;
+import base.events.Event;
+import base.reactor.Reactor;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;

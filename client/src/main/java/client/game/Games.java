@@ -1,7 +1,7 @@
 package client.game;
 
 import client.message.GameEvent;
-import shared.reactor.Reactor;
+import base.reactor.Reactor;
 
 public class Games {
 

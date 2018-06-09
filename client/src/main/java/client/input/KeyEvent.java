@@ -1,6 +1,6 @@
 package client.input;
 
-import shared.events.Event;
+import base.events.Event;
 
 public class KeyEvent extends Event {
     public enum Keys {

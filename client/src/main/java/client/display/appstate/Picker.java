@@ -12,10 +12,10 @@ import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
-import shared.events.Event;
-import shared.reactor.Chain;
-import shared.reactor.EventHandler;
-import shared.reactor.Reactor;
+import base.events.Event;
+import base.reactor.Chain;
+import base.reactor.EventHandler;
+import base.reactor.Reactor;
 
 
 public abstract class Picker extends BaseAppState {

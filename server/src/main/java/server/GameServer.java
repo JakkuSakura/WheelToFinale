@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import server.gamecenter.GameCenter;
 import server.network.ServerNetwork;
 import server.user.UserManager;
-import shared.network.MessagePusher;
-import shared.reactor.Reactor;
+import base.network.MessagePusher;
+import base.reactor.Reactor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

@@ -3,8 +3,8 @@ package server.gamecenter;
 
 import server.game.Game;
 import server.user.User;
-import shared.element.GameMap;
-import shared.reactor.Reactor;
+import base.element.GameMap;
+import base.reactor.Reactor;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,8 +8,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import shared.network.MessagePusher;
-import shared.network.NetworkInitializer;
+import base.network.MessagePusher;
+import base.network.NetworkInitializer;
 
 public class ServerNetwork {
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();

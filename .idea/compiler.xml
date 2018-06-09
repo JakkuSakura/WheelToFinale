@@ -6,19 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="base" />
         <module name="client" />
         <module name="server" />
-        <module name="shared" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="base" target="1.8" />
       <module name="client" target="1.8" />
       <module name="client-resources" target="1.5" />
       <module name="jmelibs" target="1.5" />
       <module name="server" target="1.8" />
       <module name="server-resources" target="1.5" />
       <module name="serveraa" target="8" />
-      <module name="shared" target="1.8" />
       <module name="shared-resources" target="1.5" />
       <module name="WheelToFinale" target="1.8" />
     </bytecodeTargetLevel>

@@ -7,7 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import shared.network.MessagePusher;
+import base.network.MessagePusher;
 
 public class ClientNetwork extends Thread {
     private String host;
@@ -25,7 +25,7 @@ public class ClientNetwork extends Thread {
         bootstrap
                 .group(group)
                 .channel(NioSocketChannel.class)
-                .handler(new shared.network.NetworkInitializer(pusher, new Initializer()));
+                .handler(new base.network.NetworkInitializer(pusher, new Initializer()));
 
     }
 

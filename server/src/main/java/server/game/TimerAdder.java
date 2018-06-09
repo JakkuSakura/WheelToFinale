@@ -1,8 +1,8 @@
 package server.game;
 
-import shared.events.Event;
-import shared.reactor.Chain;
-import shared.reactor.EventHandler;
+import base.events.Event;
+import base.reactor.Chain;
+import base.reactor.EventHandler;
 
 import java.util.concurrent.ExecutorService;
 

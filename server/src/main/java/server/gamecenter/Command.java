@@ -1,6 +1,6 @@
 package server.gamecenter;
 
-import shared.events.Event;
+import base.events.Event;
 
 public class Command extends Event {
 

@@ -1,5 +1,10 @@
 package client;
 
+import base.events.Event;
+import base.network.MessagePusher;
+import base.reactor.Chain;
+import base.reactor.EventHandler;
+import base.reactor.Reactor;
 import client.display.GameApp;
 import client.display.event.ExitEvent;
 import client.game.Games;
@@ -8,12 +13,6 @@ import client.network.ClientNetwork;
 import client.sounds.Sounds;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import shared.events.Event;
-import shared.network.MessagePusher;
-import shared.reactor.Chain;
-import shared.reactor.EventHandler;
-import shared.reactor.Reactor;
-
 public class GameClient {
     private Reactor reactor = new Reactor();
     private Control control = new Control(reactor);

@@ -3,7 +3,7 @@ package client.network;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import shared.events.HelloMessage;
+import base.events.HelloMessage;
 @ChannelHandler.Sharable
 public class Initializer extends SimpleChannelInboundHandler<Void> {
     @Override

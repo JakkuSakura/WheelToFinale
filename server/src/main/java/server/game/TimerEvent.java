@@ -1,6 +1,6 @@
 package server.game;
 
-import shared.events.Event;
+import base.events.Event;
 
 public class TimerEvent extends Event {
 
