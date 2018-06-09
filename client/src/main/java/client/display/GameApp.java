@@ -1,10 +1,7 @@
 package client.display;
 
 import client.GameClient;
-import client.display.appstate.AxisAppState;
-import client.display.appstate.EarthAppstate;
-import client.display.appstate.FPSPicker;
-import client.display.appstate.Picker;
+import client.display.appstate.*;
 import client.display.event.EventMapper;
 import client.display.event.ExitEvent;
 import client.input.Control;
@@ -24,6 +21,7 @@ public class GameApp extends SimpleApplication {
     private AxisAppState axisAppState = new AxisAppState(8000.0f);
     private Picker picker = new FPSPicker();
     private EventMapper eventMapper = new EventMapper();
+    private MainMenu mainMenu = new MainMenu();
     public GameApp(Control control) {
         this.control = control;
         setShowSettings(false);
