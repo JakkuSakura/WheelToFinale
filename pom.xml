@@ -25,15 +25,16 @@
         </plugins>
     </build>
     <repositories>
-        <repository>
-            <id>in-project</id>
-            <name>In Project Repo</name>
-            <url>file://${project.basedir}/libs</url>
-        </repository>
+
         <repository>
             <id>jCenter</id>
             <name>jCenter maven</name>
             <url>https://jcenter.bintray.com/</url>
+        </repository>
+        <repository>
+            <id>in-project</id>
+            <name>In Project Repo</name>
+            <url>file://${project.basedir}/libs</url>
         </repository>
         <repository>
             <id>Zhong Ke Da</id>
@@ -48,7 +49,7 @@
     </repositories>
 
     <modules>
-        <module>client</module>
+        <module>client.client</module>
         <module>server</module>
         <module>base</module>
     </modules>

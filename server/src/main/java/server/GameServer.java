@@ -1,12 +1,12 @@
 package server;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import base.network.MessagePusher;
+import base.reactor.Reactor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import server.gamecenter.GameCenter;
 import server.network.ServerNetwork;
 import server.user.UserManager;
-import base.network.MessagePusher;
-import base.reactor.Reactor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -19,7 +19,7 @@ public class GameServer {
     private final ServerNetwork network = new ServerNetwork(8888, new MessagePusher(reactor));
     private final UserManager userManager = new UserManager();
     private final GameCenter gameCenter = new GameCenter(gameThreadPool, reactor);
-    private final Logger logger = LogManager.getRootLogger();
+    private static Logger logger = LoggerFactory.getLogger(GameServer.class);
 
     public GameServer() {
         logger.info("Init GameServer");

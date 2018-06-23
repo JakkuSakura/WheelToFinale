@@ -1,21 +1,20 @@
 package server.gamecenter;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import server.game.TimerAdder;
-import server.game.TimerEvent;
 import base.events.Event;
 import base.reactor.Chain;
 import base.reactor.EventHandler;
 import base.reactor.Reactor;
+import org.slf4j.LoggerFactory;
+import server.game.TimerAdder;
+import server.game.TimerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 public class GameCenter extends EventHandler {
-    private final Logger logger = LogManager.getRootLogger();
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(GameCenter.class);
     private final List<Room> rooms = new ArrayList<>();
     private final Reactor reactor;
     private final TimerAdder timerAdder;
@@ -53,7 +52,7 @@ public class GameCenter extends EventHandler {
             }
 
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             return false;
         }
         return true;
