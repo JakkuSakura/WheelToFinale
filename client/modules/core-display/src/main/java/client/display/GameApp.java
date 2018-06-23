@@ -3,7 +3,6 @@ package client.display;
 import client.display.event.EventMapper;
 import client.display.event.ExitEvent;
 import client.input.Control;
-import client.launcher.GameClient;
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.light.AmbientLight;
@@ -84,11 +83,5 @@ public class GameApp extends SimpleApplication {
     private void cleanup() {
         control.getReactor().submitEvent(new ExitEvent());
     }
-
-    public static void main(String[] args) throws Exception {
-        GameClient.main(args);
-    }
-
-
 
 }

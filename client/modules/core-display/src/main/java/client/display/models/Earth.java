@@ -17,7 +17,7 @@ public class Earth extends Node implements Action {
         super("EarthNode");
         this.assetManager = assetManager;
         this.radius = radius;
-        Spatial model = assetManager.loadModel("obj/earth.obj");
+        Spatial model = assetManager.loadModel("assets/obj/earth.obj");
         attachChild(model);
         rotate(-theta, 0, 0);
     }
