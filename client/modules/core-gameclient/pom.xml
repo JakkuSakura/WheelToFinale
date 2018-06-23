@@ -10,22 +10,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>core-gameclient</artifactId>
-<dependencies>
-    <dependency>
-        <groupId>WheelToFinale</groupId>
-        <artifactId>core-tools</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-        <groupId>WheelToFinale</groupId>
-        <artifactId>core-network</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-        <groupId>WheelToFinale</groupId>
-        <artifactId>core-display</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>WheelToFinale</groupId>
+            <artifactId>core-tools</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>WheelToFinale</groupId>
+            <artifactId>core-network</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>WheelToFinale</groupId>
+            <artifactId>core-display</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

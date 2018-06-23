@@ -6,16 +6,17 @@
 
     <artifactId>client</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>modules/core-display</module>
-        <module>modules/core-gameclient</module>
-        <module>modules/core-network</module>
-        <module>modules/core-tools</module>
-    </modules>
     <parent>
         <groupId>WheelToFinale</groupId>
         <artifactId>WheelToFinale</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <modules>
+        <module>modules/core-display</module>
+        <module>modules/core-gameclient</module>
+        <module>modules/core-network</module>
+        <module>modules/core-tools</module>
+        <module>modlauncher</module>
+    </modules>
 
 </project>

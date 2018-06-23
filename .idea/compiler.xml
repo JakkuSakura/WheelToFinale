@@ -9,9 +9,9 @@
         <module name="base" />
         <module name="core-display" />
         <module name="core-gameclient" />
-        <module name="core-modlauncher" />
         <module name="core-network" />
         <module name="core-tools" />
+        <module name="modlauncher" />
         <module name="server" />
       </profile>
     </annotationProcessing>
@@ -25,6 +25,7 @@
       <module name="core-network" target="1.8" />
       <module name="core-tools" target="1.8" />
       <module name="jmelibs" target="1.5" />
+      <module name="modlauncher" target="1.8" />
       <module name="server" target="1.8" />
       <module name="server-resources" target="1.5" />
       <module name="serveraa" target="8" />

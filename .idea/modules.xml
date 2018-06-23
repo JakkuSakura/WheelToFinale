@@ -7,9 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-display/core-display.iml" filepath="$PROJECT_DIR$/client/modules/core-display/core-display.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-gameclient/core-gameclient.iml" filepath="$PROJECT_DIR$/client/modules/core-gameclient/core-gameclient.iml" />
-      <module fileurl="file://$PROJECT_DIR$/client/modules/core-modlauncher/core-modlauncher.iml" filepath="$PROJECT_DIR$/client/modules/core-modlauncher/core-modlauncher.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-network/core-network.iml" filepath="$PROJECT_DIR$/client/modules/core-network/core-network.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-tools/core-tools.iml" filepath="$PROJECT_DIR$/client/modules/core-tools/core-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client/modlauncher/modlauncher.iml" filepath="$PROJECT_DIR$/client/modlauncher/modlauncher.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
     </modules>
   </component>

@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Class-Path: lemur-proto-1.9.1.jar protostuff-collectionschema-1.4.0.ja
+ r guava-25.0-jre.jar groovy-templates-3.0.0-alpha-2.jar groovy-macro-
+ 3.0.0-alpha-2.jar groovy-bsf-3.0.0-alpha-2.jar groovy-sql-3.0.0-alpha
+ -2.jar slf4j-log4j12-1.7.25.jar lemur-1.10.1.jar animal-sniffer-annot
+ ations-1.14.jar groovy-ant-3.0.0-alpha-2.jar jline-2.14.6.jar groovy-
+ jmx-3.0.0-alpha-2.jar ant-1.10.3.jar groovy-json-3.0.0-alpha-2.jar gr
+ oovy-json-direct-3.0.0-alpha-2.jar jutils-1.0.0.jar groovy-dateutil-3
+ .0.0-alpha-2.jar log4j-api-2.11.0.jar groovy-groovydoc-3.0.0-alpha-2.
+ jar jinput-platform-2.0.5-natives-osx.jar ant-junit-1.10.3.jar groovy
+ -swing-3.0.0-alpha-2.jar ant-antlr-1.10.3.jar protostuff-api-1.4.0.ja
+ r lwjgl-platform-2.9.3-natives-windows.jar jme3-lwjgl-3.2.1-stable.ja
+ r protostuff-core-1.4.0.jar jme3-bullet-native-3.2.1-stable.jar lwjgl
+ -2.9.3.jar error_prone_annotations-2.1.3.jar qdox-1.12.1.jar junit-4.
+ 12.jar jme3-desktop-3.2.1-stable.jar jinput-2.0.5.jar groovy-xml-3.0.
+ 0-alpha-2.jar groovy-docgenerator-3.0.0-alpha-2.jar testng-6.9.10.jar
+  j2objc-annotations-1.1.jar groovy-console-3.0.0-alpha-2.jar jinput-p
+ latform-2.0.5-natives-linux.jar protostuff-runtime-1.4.0.jar slf4j-ap
+ i-1.7.25.jar hamcrest-core-1.3.jar groovy-jsr223-3.0.0-alpha-2.jar ne
+ tty-all-4.1.24.Final.jar groovy-servlet-3.0.0-alpha-2.jar jsr305-1.3.
+ 9.jar jme3-core-3.2.1-stable.jar groovy-test-3.0.0-alpha-2.jar checke
+ r-compat-qual-2.0.0.jar lwjgl-platform-2.9.3-natives-linux.jar jme3-b
+ ullet-3.2.1-stable.jar lwjgl-platform-2.9.3-natives-osx.jar jaxb-api-
+ 2.3.0.jar jcommander-1.48.jar groovy-3.0.0-alpha-2.jar commons-loggin
+ g-1.2.jar groovy-nio-3.0.0-alpha-2.jar jinput-platform-2.0.5-natives-
+ windows.jar log4j-1.2.17.jar jme3-terrain-3.2.1-stable.jar groovy-gro
+ ovysh-3.0.0-alpha-2.jar groovy-datetime-3.0.0-alpha-2.jar groovy-test
+ ng-3.0.0-alpha-2.jar objenesis-2.6.jar log4j-core-2.11.0.jar ant-laun
+ cher-1.10.3.jar
+Main-Class: client.GameClient
+

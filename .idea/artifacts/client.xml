@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="client">
+    <output-path>$PROJECT_DIR$/out/artifacts/client</output-path>
+    <root id="root">
+      <element id="directory" name="bin" />
+      <element id="directory" name="modules" />
+      <element id="directory" name="data" />
+      <element id="directory" name="etc" />
+      <element id="archive" name="launcher.jar">
+        <element id="module-output" name="client" />
+      </element>
+    </root>
+  </artifact>
+</component>
