@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="base" />
+        <module name="core-core" />
         <module name="core-display" />
         <module name="core-gameclient" />
         <module name="core-network" />
@@ -19,6 +20,7 @@
       <module name="base" target="1.8" />
       <module name="client" target="1.8" />
       <module name="client-resources" target="1.5" />
+      <module name="core-core" target="1.8" />
       <module name="core-display" target="1.8" />
       <module name="core-gameclient" target="1.8" />
       <module name="core-modlauncher" target="1.8" />

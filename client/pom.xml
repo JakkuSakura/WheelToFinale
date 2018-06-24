@@ -17,6 +17,7 @@
         <module>modules/core-network</module>
         <module>modules/core-tools</module>
         <module>modlauncher</module>
+        <module>modules/core-core</module>
     </modules>
 
 </project>

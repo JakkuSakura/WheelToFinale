@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/WheelToFinale.iml" filepath="$PROJECT_DIR$/WheelToFinale.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/client/modules/core-core/core-core.iml" filepath="$PROJECT_DIR$/client/modules/core-core/core-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-display/core-display.iml" filepath="$PROJECT_DIR$/client/modules/core-display/core-display.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-gameclient/core-gameclient.iml" filepath="$PROJECT_DIR$/client/modules/core-gameclient/core-gameclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/modules/core-network/core-network.iml" filepath="$PROJECT_DIR$/client/modules/core-network/core-network.iml" />
