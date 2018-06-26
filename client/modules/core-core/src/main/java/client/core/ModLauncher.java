@@ -1,4 +1,4 @@
-package client;
+package client.core;
 
 
 import base.reactor.Reactor;
@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -37,9 +36,8 @@ public class ModLauncher implements ModuleBase {
                 continue;
             GameModule gameModule = loadModuleInfo(e);
             if (gameModule != null) {
-                System.out.println("loaded " + gameModule.getName() + " version " + gameModule.getVersion());
-
                 gameModules.add(gameModule);
+                System.out.println("loaded info of " + gameModule.getName() + " version " + gameModule.getVersion());
             }
 
         }
@@ -63,39 +61,60 @@ public class ModLauncher implements ModuleBase {
 
     }
 
-    public GameModule loadModuleInfo(String moduleName) throws FileNotFoundException {
+    public static GameModule loadModuleInfo(String moduleName) throws FileNotFoundException {
         String confPath = joinPath(GAME_MOD_PATH, moduleName, moduleName + ".json");
         FileReader reader = new FileReader(confPath);
         Gson gson = new Gson();
         return gson.fromJson(reader, GameModule.class);
     }
 
-    public Class loadClass(GameModule gameModule) throws InvocationTargetException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, MalformedURLException {
+    public static Class<?> loadClass(GameModule gameModule) {
+        String jarPath = joinPath(GAME_MOD_PATH, gameModule.getName(), gameModule.getJarPath());
+        return loadClassInJar(jarPath, gameModule.getMainClass());
+    }
 
-            String jarPath = joinPath(GAME_MOD_PATH, gameModule.getName(), gameModule.getJarPath());
-            File jarFile = new File(jarPath);
-            URL jarURL = jarFile.toURI().toURL();
-            URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-            Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-            add.setAccessible(true);
-            add.invoke(urlClassLoader, jarURL);
-            return Class.forName(gameModule.getMainClass());
+
+    public static Class<?> loadClassInJar(String fileName, String processorName) {
+        URL jarUrl;
+        try {
+            jarUrl = new URL(fileName);
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+            return null;
+        }
+        URLClassLoader loader = new URLClassLoader(new URL[]{jarUrl}, Thread.currentThread().getContextClassLoader());
+//        URLClassLoader loader = new URLClassLoader(new URL[] { url });
+        try {
+            return loader.loadClass(processorName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public ModuleBase loadMod(GameModule gameModule) {
         if (!gameModule.isEnabled())
             return null;
+        Class<?> loadClass;
         try {
-            Class loadClass = loadClass(gameModule);
-            ModuleBase instance = (ModuleBase) loadClass.getDeclaredConstructor().newInstance();
+            loadClass = Class.forName(gameModule.getMainClass());
+        } catch (ClassNotFoundException e) {
+            loadClass = loadClass(gameModule);
+        }
+        System.out.println(loadClass);
+
+        ModuleBase instance = enabledModules.get(loadClass);
+        if (loadClass != null && instance == null) {
+            try {
+                instance = (ModuleBase) loadClass.getDeclaredConstructor().newInstance();
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                e.printStackTrace();
+                return null;
+            }
             enabledModules.put(loadClass, instance);
             instance.init(rootReactor);
-            return instance;
-
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | MalformedURLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
         }
+        return instance;
     }
 
 
@@ -114,14 +133,19 @@ public class ModLauncher implements ModuleBase {
     @Override
     public void init(Reactor reactor) {
 
+        // nothing to do
+    }
+
+    public void loadAllModules() throws IOException {
+        loadModulesList();
+        List<GameModule> list = getGameModules();
+        enabledModules.put(ModLauncher.class, this);
+        list.forEach(this::loadMod);
+
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ModLauncher modLauncher = new ModLauncher();
-        modLauncher.generateDefaultJson();
-        modLauncher.loadModulesList();
-        List<GameModule> list = modLauncher.getGameModules();
-        list.forEach(modLauncher::loadMod);
+        modLauncher.loadAllModules();
     }
 }
-

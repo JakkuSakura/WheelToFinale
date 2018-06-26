@@ -2,7 +2,7 @@ package client.display;
 
 
 import client.display.event.EventMapper;
-import client.coordinate.GpsCoordinate;
+import client.tools.coordinate.GpsCoordinate;
 import client.display.models.Earth;
 import client.display.models.EarthMatter;
 import client.display.models.City;

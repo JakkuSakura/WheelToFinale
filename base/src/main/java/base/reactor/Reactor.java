@@ -14,12 +14,18 @@ public class Reactor extends EventHandler {
 
     private Reactor parentReactor;
 
+    public Reactor(Reactor parentReactor, Class<? extends Event> eventType) {
+        if (parentReactor != null)
+            parentReactor.addSubReactor(eventType, this);
+        this.eventType = eventType;
+    }
+
     public Reactor() {
-        this.eventType = Event.class;
+        this(null, Event.class);
     }
 
     public Reactor(Class<? extends Event> eventType) {
-        this.eventType = eventType;
+        this(null, eventType);
     }
 
     public Class<? extends Event> getEventType() {
@@ -27,22 +33,21 @@ public class Reactor extends EventHandler {
     }
 
     public void setParentReactor(Reactor reactor) {
-        setParentReactorInner(reactor);
         reactor.addSubReactor(getEventType(), this);
     }
-    public void addSubReactor(Class<? extends Event> eventClass, Reactor reactor) {
-        reactor.setParentReactorInner(this);
-        addHandler(eventClass, reactor);
-    }
 
-    private void setParentReactorInner(Reactor reactor) {
-        this.parentReactor = reactor;
+    public void addSubReactor(Class<? extends Event> eventClass, Reactor reactor) {
+        reactor.parentReactor = this;
+        addHandler(eventClass, reactor);
     }
 
     public void submitParent(Event event) {
         Objects.requireNonNull(parentReactor, "Didn't set parent Reactor").submitEvent(event);
     }
 
+    public Reactor getParentReactor() {
+        return parentReactor;
+    }
 
     public void addHandler(Class<? extends Event> eventClass, EventHandler handler) {
         Queue<EventHandler> handlers = this.handlers.get(eventClass);

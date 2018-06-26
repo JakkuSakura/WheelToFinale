@@ -15,7 +15,6 @@
         <module>modules/core-display</module>
         <module>modules/core-gameclient</module>
         <module>modules/core-network</module>
-        <module>modules/core-tools</module>
         <module>modlauncher</module>
         <module>modules/core-core</module>
     </modules>

@@ -1,6 +1,5 @@
 package base.network;
 
-import base.reactor.Priority;
 import base.reactor.EventHandler;
 
 public abstract class NetworkHandler<T extends NetworkEvent> extends EventHandler {
@@ -12,7 +11,7 @@ public abstract class NetworkHandler<T extends NetworkEvent> extends EventHandle
 
     public NetworkHandler(String name) {
         super();
-        setLevel(Priority.HIGH.getLevel());
+        setLevel(HIGH);
         this.name = name;
     }
 

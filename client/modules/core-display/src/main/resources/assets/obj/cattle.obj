@@ -2124,7 +2124,7 @@ v 83.28131103515625 148.44091796875 52.75795364379883
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.3
 usemtl 材质.2
@@ -3073,7 +3073,7 @@ v 52.75795364379883 148.44091796875 -83.28131103515625
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.2
 usemtl 材质.2
@@ -4022,7 +4022,7 @@ v -83.28131103515625 148.44091796875 -52.75795364379883
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.1
 usemtl 材质.2
@@ -4535,7 +4535,7 @@ f 1744/227/266 1672/1/266 1674/217/266
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.4_1
 usemtl 材质.2
@@ -5048,7 +5048,7 @@ f 436/227/266 364/1/266 366/217/266
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.3_1
 usemtl 材质.2
@@ -5561,7 +5561,7 @@ f 872/227/266 800/1/266 802/217/266
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.2_1
 usemtl 材质.2
@@ -6074,7 +6074,7 @@ f 1308/227/266 1236/1/266 1238/217/266
 
 # 0 normal
 
-# 0 texture client.coordinate
+# 0 texture client.tools.coordinate
 
 o 圆锥.1.1_1
 usemtl 材质.2

@@ -1,4 +1,4 @@
-package client;
+package client.core;
 
 import base.reactor.Reactor;
 

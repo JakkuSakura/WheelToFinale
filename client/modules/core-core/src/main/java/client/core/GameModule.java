@@ -1,4 +1,4 @@
-package client;
+package client.core;
 
 public class GameModule {
     private String version = "";
