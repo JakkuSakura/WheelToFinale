@@ -1,8 +1,8 @@
 package client.display.models;
 
-import client.display.event.EventMapper;
-import client.tools.coordinate.GpsCoordinate;
+import client.display.coordinate.GpsCoordinate;
 import client.display.event.Action;
+import client.display.event.EventMapper;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Spatial;
 

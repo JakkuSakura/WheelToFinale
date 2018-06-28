@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact name="core-display:jar">
+    <output-path>$PROJECT_DIR$/client/modules/core-display</output-path>
+    <root id="root">
+      <element id="archive" name="core-display.jar">
+        <element id="module-output" name="core-display" />
+      </element>
+      <element id="library" level="project" name="Maven: com.simsilica:lemur:1.10.1" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-desktop:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: org.lwjgl.lwjgl:lwjgl:2.9.3" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.13" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-bullet-native:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: net.java.jinput:jinput-platform:natives-windows:2.0.5" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-lwjgl:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-core:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-bullet:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: net.java.jinput:jinput-platform:natives-osx:2.0.5" />
+      <element id="library" level="project" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.3" />
+      <element id="library" level="project" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.3" />
+      <element id="library" level="project" name="Maven: net.java.jinput:jinput:2.0.5" />
+      <element id="library" level="project" name="Maven: org.jmonkeyengine:jme3-terrain:3.2.1-stable" />
+      <element id="library" level="project" name="Maven: com.simsilica:lemur-proto:1.9.1" />
+      <element id="library" level="project" name="Maven: net.java.jutils:jutils:1.0.0" />
+      <element id="library" level="project" name="Maven: net.java.jinput:jinput-platform:natives-linux:2.0.5" />
+      <element id="library" level="project" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" />
+    </root>
+  </artifact>
+</component>

@@ -1,7 +1,10 @@
 package client.display.models;
 
-import client.tools.coordinate.GpsCoordinate;
+import client.display.coordinate.GpsCoordinate;
 import com.jme3.asset.AssetManager;
+
+;
+
 
 public class City extends EarthMatter {
     public City(AssetManager assetManager, GpsCoordinate gpsCoordinate) {

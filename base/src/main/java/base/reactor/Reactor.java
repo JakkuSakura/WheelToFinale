@@ -49,6 +49,9 @@ public class Reactor extends EventHandler {
         return parentReactor;
     }
 
+    public void addHandler(SimpleEventHandler eventHandler) {
+        addHandler(Event.class, eventHandler);
+    }
     public void addHandler(Class<? extends Event> eventClass, EventHandler handler) {
         Queue<EventHandler> handlers = this.handlers.get(eventClass);
         if (handlers == null)

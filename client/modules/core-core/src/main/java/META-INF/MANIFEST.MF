@@ -2,4 +2,5 @@ Manifest-Version: 1.0
 Class-Path: netty-all-4.1.24.Final.jar gson-2.8.4.jar protostuff-core-
  1.4.0.jar protostuff-collectionschema-1.4.0.jar objenesis-2.6.jar pro
  tostuff-runtime-1.4.0.jar protostuff-api-1.4.0.jar
+Main-Class: client.display.MainMenu
 

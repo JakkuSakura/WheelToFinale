@@ -23,11 +23,13 @@ public class GameClient {
     private Logger logger = LogManager.getRootLogger();
     private boolean isRunning = false;
 
-    public void run() throws Exception {
-        logger.info("Running launcher.launcher");
+    public void run() {
+        logger.info("Running launcher");
         isRunning = true;
         clientNetwork.start();
         gameApp.start();
+
+        waitForStop();
     }
 
     public GameClient() {
@@ -53,7 +55,7 @@ public class GameClient {
 
             @Override
             public boolean check(Event event) {
-                return event instanceof ExitEvent;
+                return event.convert(ExitEvent.class).isPresent();
             }
         });
     }
@@ -94,7 +96,7 @@ public class GameClient {
     public void waitForStop() {
         logger.info("Waiting for stop");
         try {
-            while (isRunning()) {
+            while (isRunning) {
                 Thread.sleep(1000);
             }
         } catch (InterruptedException ignored) {
@@ -104,11 +106,10 @@ public class GameClient {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         GameClient gameClient = new GameClient();
         gameClient.run();
-        gameClient.waitForStop();
     }
 
 }

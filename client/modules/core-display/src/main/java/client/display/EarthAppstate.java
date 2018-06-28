@@ -1,11 +1,11 @@
 package client.display;
 
 
+import client.display.coordinate.GpsCoordinate;
 import client.display.event.EventMapper;
-import client.tools.coordinate.GpsCoordinate;
+import client.display.models.City;
 import client.display.models.Earth;
 import client.display.models.EarthMatter;
-import client.display.models.City;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
@@ -54,7 +54,7 @@ public class EarthAppstate extends BaseAppState{
         final float radius = 6400.0f;
 
         earth = new Earth(assetManager, radius);
-        EarthMatter earthMatter = new City(assetManager, new GpsCoordinate());
+        EarthMatter earthMatter = new City(assetManager, new GpsCoordinate(0.0f, 0.0f, 0.0f));
         if (getEventMapper() != null) {
             getEventMapper().register(EventMapper.Type.SELECT, earth, earth);
         }

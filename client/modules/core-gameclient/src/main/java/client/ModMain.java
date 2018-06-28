@@ -6,17 +6,15 @@ import base.reactor.EventHandler;
 import base.reactor.Reactor;
 import client.core.ModuleBase;
 import client.core.StartClientEvent;
-import client.display.event.StartDisplayEvent;
-import client.network.NetworkStartEvent;
 
 public class ModMain extends EventHandler implements ModuleBase {
     private Reactor rootReactor;
     private Reactor reactor;
-
+    private GameClient gameClient;
     @Override
     public void handler(Chain chain, Event event) {
-        rootReactor.submitEvent(new StartDisplayEvent());
-        rootReactor.submitEvent(new NetworkStartEvent());
+           gameClient = new GameClient();
+           gameClient.run();
     }
 
     @Override
@@ -30,4 +28,17 @@ public class ModMain extends EventHandler implements ModuleBase {
         this.reactor = new Reactor(reactor, GameClientEvent.class);
         reactor.addHandler(StartClientEvent.class, this);
     }
+
+    public Reactor getReactor() {
+        return reactor;
+    }
+
+    public Reactor getRootReactor() {
+        return rootReactor;
+    }
+
+    public GameClient getGameClient() {
+        return gameClient;
+    }
+
 }

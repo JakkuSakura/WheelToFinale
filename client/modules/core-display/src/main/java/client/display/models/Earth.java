@@ -6,7 +6,8 @@ import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
-import static client.tools.coordinate.GpsCoordinate.toRad;
+import static client.display.coordinate.GpsCoordinate.toRad;
+
 
 public class Earth extends Node implements Action {
     private AssetManager assetManager;

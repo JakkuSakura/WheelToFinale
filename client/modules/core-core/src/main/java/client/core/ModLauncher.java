@@ -1,12 +1,11 @@
 package client.core;
 
-
 import base.reactor.Reactor;
 import com.google.gson.Gson;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -14,16 +13,44 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class ModLauncher implements ModuleBase {
-    private List<GameModule> gameModules = new ArrayList<>();
+    private List<GameModuleInfo> gameModuleInfos = new ArrayList<>();
     private Map<Class, ModuleBase> enabledModules = new HashMap<>();
     private static String GAME_MOD_PATH = "modules";
     private Reactor rootReactor = new Reactor();
 
-    public void generateDefaultJson() throws IOException {
+    private URLClassLoader loader = new URLClassLoader(new URL[0], Thread.currentThread().getContextClassLoader());
+    private Method addURL = initAddMethod();
+
+    /**
+     * 通过filepath加载文件到classpath。
+     * @param file 文件路径
+     */
+    private void addURL(File file) {
+        try {
+            addURL.invoke(loader, file.toURI().toURL());
+        }
+        catch (Exception ignored) {
+        }
+    }
+
+    private static Method initAddMethod() {
+        try {
+            Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            add.setAccessible(true);
+            return add;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void generateDefaultJson() throws IOException {
         Gson gson = new Gson();
         FileWriter writer = new FileWriter("modules/default.json");
-        gson.toJson(new GameModule(), writer);
+        gson.toJson(new GameModuleInfo(), writer);
         writer.close();
 
     }
@@ -34,10 +61,10 @@ public class ModLauncher implements ModuleBase {
         for (String e : modules != null ? modules : new String[0]) {
             if (!new File(joinPath(GAME_MOD_PATH, e)).isDirectory()) //simply ignore files in modules path
                 continue;
-            GameModule gameModule = loadModuleInfo(e);
-            if (gameModule != null) {
-                gameModules.add(gameModule);
-                System.out.println("loaded info of " + gameModule.getName() + " version " + gameModule.getVersion());
+            GameModuleInfo gameModuleInfo = loadModuleInfo(e);
+            if (gameModuleInfo != null) {
+                gameModuleInfos.add(gameModuleInfo);
+                System.out.println("loaded info of " + gameModuleInfo.getName() + " version " + gameModuleInfo.getVersion());
             }
 
         }
@@ -61,53 +88,51 @@ public class ModLauncher implements ModuleBase {
 
     }
 
-    public static GameModule loadModuleInfo(String moduleName) throws FileNotFoundException {
+    public static GameModuleInfo loadModuleInfo(String moduleName) throws FileNotFoundException {
         String confPath = joinPath(GAME_MOD_PATH, moduleName, moduleName + ".json");
         FileReader reader = new FileReader(confPath);
         Gson gson = new Gson();
-        return gson.fromJson(reader, GameModule.class);
+        return gson.fromJson(reader, GameModuleInfo.class);
     }
 
-    public static Class<?> loadClass(GameModule gameModule) {
-        String jarPath = joinPath(GAME_MOD_PATH, gameModule.getName(), gameModule.getJarPath());
-        return loadClassInJar(jarPath, gameModule.getMainClass());
+    public Class<?> loadClass(GameModuleInfo gameModuleInfo) {
+        String jarPath = joinPath(GAME_MOD_PATH, gameModuleInfo.getName());
+        return addJarPath(jarPath, gameModuleInfo.getMainClass());
     }
 
 
-    public static Class<?> loadClassInJar(String fileName, String processorName) {
-        URL jarUrl;
-        try {
-            jarUrl = new URL(fileName);
-        } catch (MalformedURLException e1) {
-            e1.printStackTrace();
-            return null;
+    public Class<?> addJarPath(String pathname, String processorName) {
+        File modulePath = new File(pathname);
+        File[] files = modulePath.listFiles((dir, name) -> name.endsWith(".jar"));
+        for (File file : files != null ? files : new File[0]) {
+            addURL(file);
         }
-        URLClassLoader loader = new URLClassLoader(new URL[]{jarUrl}, Thread.currentThread().getContextClassLoader());
-//        URLClassLoader loader = new URLClassLoader(new URL[] { url });
+
         try {
             return loader.loadClass(processorName);
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
-    public ModuleBase loadMod(GameModule gameModule) {
-        if (!gameModule.isEnabled())
+    public ModuleBase loadMod(GameModuleInfo gameModuleInfo) {
+        if (!gameModuleInfo.isEnabled())
             return null;
         Class<?> loadClass;
         try {
-            loadClass = Class.forName(gameModule.getMainClass());
+            loadClass = Class.forName(gameModuleInfo.getMainClass());
         } catch (ClassNotFoundException e) {
-            loadClass = loadClass(gameModule);
+            loadClass = loadClass(gameModuleInfo);
         }
         System.out.println(loadClass);
 
         ModuleBase instance = enabledModules.get(loadClass);
+
         if (loadClass != null && instance == null) {
             try {
                 instance = (ModuleBase) loadClass.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                System.out.flush();
                 e.printStackTrace();
                 return null;
             }
@@ -118,8 +143,8 @@ public class ModLauncher implements ModuleBase {
     }
 
 
-    public List<GameModule> getGameModules() {
-        return gameModules;
+    public List<GameModuleInfo> getGameModuleInfos() {
+        return gameModuleInfos;
     }
 
     public Map<Class, ModuleBase> getEnabledModules() {
@@ -138,14 +163,16 @@ public class ModLauncher implements ModuleBase {
 
     public void loadAllModules() throws IOException {
         loadModulesList();
-        List<GameModule> list = getGameModules();
+        List<GameModuleInfo> list = getGameModuleInfos();
         enabledModules.put(ModLauncher.class, this);
-        list.forEach(this::loadMod);
+        new DependencesSolver(list).getSorted().forEach(this::loadMod);
 
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
+        generateDefaultJson();
         ModLauncher modLauncher = new ModLauncher();
         modLauncher.loadAllModules();
+        modLauncher.getRootReactor().submitEvent(new StartClientEvent());
     }
 }

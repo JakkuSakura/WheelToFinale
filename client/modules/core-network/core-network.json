@@ -1,1 +1,11 @@
-{"version":"","name":"core-network","describe":"","jarPath":"core-network.jar","mainClass":"client.network.ModMain","enabled":true,"hidden":false}
+{
+  "version": "1.0.0",
+  "name": "core-network",
+  "describe": "The network module for the game",
+  "jarPath": "core-network.jar",
+  "mainClass": "client.network.ModMain",
+  "enabled": true,
+  "hidden": false,
+  "loadLevel": 1000,
+  "dependencies": ["core-core"]
+}

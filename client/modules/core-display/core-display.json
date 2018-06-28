@@ -1,1 +1,11 @@
-{"version":"","name":"core-display","describe":"","jarPath":"core-display.jar","mainClass":"client.display.ModMain","enabled":true,"hidden":false}
+{
+  "version": "1.0.0",
+  "name": "core-display",
+  "describe": "The core display module for the game",
+  "jarPath": "core-display.jar",
+  "mainClass": "client.display.ModMain",
+  "enabled": true,
+  "hidden": false,
+  "loadLevel": 1000,
+  "dependencies": ["core-core"]
+}

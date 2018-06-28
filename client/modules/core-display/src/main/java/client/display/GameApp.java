@@ -10,6 +10,7 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.system.AppSettings;
+import demo.MainMenuState;
 
 
 public class GameApp extends SimpleApplication {
@@ -19,7 +20,7 @@ public class GameApp extends SimpleApplication {
     private AxisAppState axisAppState = new AxisAppState(8000.0f);
     private Picker picker = new FPSPicker();
     private EventMapper eventMapper = new EventMapper();
-    private MainMenu mainMenu = new MainMenu();
+    private MainMenuState mainMenu = new MainMenuState();
     public GameApp(Control control) {
         this.control = control;
         setShowSettings(false);

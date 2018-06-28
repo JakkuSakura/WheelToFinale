@@ -1,8 +1,8 @@
-import org.junit.Test;
 import base.events.Event;
 import base.reactor.Chain;
-import base.reactor.Reactor;
 import base.reactor.EventHandler;
+import base.reactor.Reactor;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,5 +27,27 @@ public class ReactorTest {
         reactor.submitEvent(new Event());
         assertEquals(val[0], 1);
     }
+
+    static public class Ev extends Event {
+
+    }
+    @Test
+    public void subReactor() {
+        Reactor root = new Reactor();
+        Reactor sub = new Reactor(root, Ev.class);
+        sub.addHandler(Ev.class, new EventHandler() {
+            @Override
+            public void handler(Chain chain, Event event) {
+                System.out.println("FUCK");
+            }
+
+            @Override
+            public boolean check(Event event) {
+                return event.convert(Ev.class).isPresent();
+            }
+        });
+        root.submitEvent(new Ev());
+    }
+
 
 }

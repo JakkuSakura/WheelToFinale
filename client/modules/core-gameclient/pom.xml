@@ -15,16 +15,19 @@
             <groupId>WheelToFinale</groupId>
             <artifactId>core-core</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>WheelToFinale</groupId>
             <artifactId>core-network</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>WheelToFinale</groupId>
             <artifactId>core-display</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
