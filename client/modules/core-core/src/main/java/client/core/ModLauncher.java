@@ -13,21 +13,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.ClassLoader.getSystemClassLoader;
+
 
 public class ModLauncher implements ModuleBase {
-    private List<GameModuleInfo> gameModuleInfos = new ArrayList<>();
-    private Map<Class, ModuleBase> enabledModules = new HashMap<>();
+    private static List<GameModuleInfo> gameModuleInfos = new ArrayList<>();
+    private static Map<Class, ModuleBase> enabledModules = new HashMap<>();
     private static String GAME_MOD_PATH = "modules";
-    private Reactor rootReactor = new Reactor();
+    private static Reactor rootReactor = new Reactor();
 
-    private URLClassLoader loader = new URLClassLoader(new URL[0], Thread.currentThread().getContextClassLoader());
-    private Method addURL = initAddMethod();
+    private static URLClassLoader loader = new URLClassLoader(new URL[0], getSystemClassLoader());
+    private static Method addURL = initAddMethod();
 
     /**
      * 通过filepath加载文件到classpath。
      * @param file 文件路径
      */
-    private void addURL(File file) {
+    private static void addURL(File file) {
         try {
             addURL.invoke(loader, file.toURI().toURL());
         }
@@ -55,7 +57,7 @@ public class ModLauncher implements ModuleBase {
 
     }
 
-    public void loadModulesList() throws IOException {
+    public static void loadModulesList() throws IOException {
         File file = new File(GAME_MOD_PATH);
         String[] modules = file.list();
         for (String e : modules != null ? modules : new String[0]) {
@@ -70,7 +72,7 @@ public class ModLauncher implements ModuleBase {
         }
     }
 
-    static public String joinPath(String... paths) {
+    public static String joinPath(String... paths) {
         if (paths.length == 0) {
             return ".";
         } else if (paths.length == 1) {
@@ -95,13 +97,13 @@ public class ModLauncher implements ModuleBase {
         return gson.fromJson(reader, GameModuleInfo.class);
     }
 
-    public Class<?> loadClass(GameModuleInfo gameModuleInfo) {
+    public static Class<?> loadClass(GameModuleInfo gameModuleInfo) {
         String jarPath = joinPath(GAME_MOD_PATH, gameModuleInfo.getName());
         return addJarPath(jarPath, gameModuleInfo.getMainClass());
     }
 
 
-    public Class<?> addJarPath(String pathname, String processorName) {
+    public static Class<?> addJarPath(String pathname, String processorName) {
         File modulePath = new File(pathname);
         File[] files = modulePath.listFiles((dir, name) -> name.endsWith(".jar"));
         for (File file : files != null ? files : new File[0]) {
@@ -115,7 +117,7 @@ public class ModLauncher implements ModuleBase {
         }
     }
 
-    public ModuleBase loadMod(GameModuleInfo gameModuleInfo) {
+    public static ModuleBase loadMod(GameModuleInfo gameModuleInfo) {
         if (!gameModuleInfo.isEnabled())
             return null;
         Class<?> loadClass;
@@ -143,15 +145,15 @@ public class ModLauncher implements ModuleBase {
     }
 
 
-    public List<GameModuleInfo> getGameModuleInfos() {
+    public static List<GameModuleInfo> getGameModuleInfos() {
         return gameModuleInfos;
     }
 
-    public Map<Class, ModuleBase> getEnabledModules() {
+    public static Map<Class, ModuleBase> getEnabledModules() {
         return enabledModules;
     }
 
-    public Reactor getRootReactor() {
+    public static Reactor getRootReactor() {
         return rootReactor;
     }
 
@@ -161,18 +163,21 @@ public class ModLauncher implements ModuleBase {
         // nothing to do
     }
 
-    public void loadAllModules() throws IOException {
+    public static void loadAllModules() throws IOException {
         loadModulesList();
         List<GameModuleInfo> list = getGameModuleInfos();
-        enabledModules.put(ModLauncher.class, this);
-        new DependencesSolver(list).getSorted().forEach(this::loadMod);
+        new DependencesSolver(list).getSorted().forEach(ModLauncher::loadMod);
 
     }
 
+    public static URLClassLoader getLoader() {
+        return loader;
+    }
+
     public static void main(String[] args) throws IOException {
+        Thread.currentThread().setContextClassLoader(ModLauncher.getLoader());
         generateDefaultJson();
-        ModLauncher modLauncher = new ModLauncher();
-        modLauncher.loadAllModules();
-        modLauncher.getRootReactor().submitEvent(new StartClientEvent());
+        loadAllModules();
+        getRootReactor().submitEvent(new StartClientEvent());
     }
 }

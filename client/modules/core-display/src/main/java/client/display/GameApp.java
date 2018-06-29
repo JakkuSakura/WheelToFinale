@@ -3,24 +3,26 @@ package client.display;
 import client.display.event.EventMapper;
 import client.display.event.ExitEvent;
 import client.input.Control;
+import com.jme3.app.LegacyApplication;
 import com.jme3.app.SimpleApplication;
-import com.jme3.input.controls.ActionListener;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.system.AppSettings;
-import demo.MainMenuState;
+
+import java.util.logging.Logger;
 
 
 public class GameApp extends SimpleApplication {
+    private static final Logger logger = Logger.getLogger(LegacyApplication.class.getName());
 
     private Control control;
     private EarthAppstate earthAppstate = new EarthAppstate();
     private AxisAppState axisAppState = new AxisAppState(8000.0f);
     private Picker picker = new FPSPicker();
     private EventMapper eventMapper = new EventMapper();
-    private MainMenuState mainMenu = new MainMenuState();
+
     public GameApp(Control control) {
         this.control = control;
         setShowSettings(false);
@@ -30,22 +32,12 @@ public class GameApp extends SimpleApplication {
         setSettings(settings);
         earthAppstate.setEventMapper(eventMapper);
 
+
     }
+
 
     @Override
     public void simpleInitApp() {
-        inputManager.addListener(new ActionListener(){
-            @Override
-            public void onAction(String name, boolean isPressed, float tpf) {
-                if (!isPressed) {
-                    return;
-                }
-
-                if (name.equals(INPUT_MAPPING_EXIT)) {
-                    cleanup();
-                }
-            }
-        }, INPUT_MAPPING_EXIT);
         control.initKeys(inputManager);
         cam.setFrustumFar(30000.0f);
         cam.setLocation(new Vector3f(7000, 0, 0));
@@ -54,7 +46,6 @@ public class GameApp extends SimpleApplication {
 //        flyCam.setEnabled(false);
 
         viewPort.setBackgroundColor(ColorRGBA.LightGray);
-
 
 
         // 定向光
@@ -81,8 +72,10 @@ public class GameApp extends SimpleApplication {
 
     }
 
-    private void cleanup() {
+    public void stop() {
+        super.stop();
         control.getReactor().submitEvent(new ExitEvent());
     }
+
 
 }

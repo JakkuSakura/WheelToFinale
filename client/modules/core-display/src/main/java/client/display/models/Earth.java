@@ -3,6 +3,7 @@ package client.display.models;
 import client.display.event.Action;
 import client.display.event.EventMapper;
 import com.jme3.asset.AssetManager;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
@@ -25,7 +26,9 @@ public class Earth extends Node implements Action {
 
     public void addModel(EarthMatter earthMatter) {
         Spatial spatial = earthMatter.getSpatial();
-        spatial.setLocalTranslation(earthMatter.getGpsCoordinate().getVector3f().mult(radius));
+        Vector3f translation = earthMatter.getGpsCoordinate().getVector3f().mult(radius);
+        System.out.println(translation);
+        spatial.setLocalTranslation(translation);
         spatial.rotateUpTo(earthMatter.getGpsCoordinate().getVector3f());
         attachChild(spatial);
     }

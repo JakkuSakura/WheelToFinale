@@ -37,9 +37,9 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: com.simsilica:lemur-proto:1.9.1" level="project" />
-    <orderEntry type="module" module-name="core-core" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.11.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.11.0" level="project" />
+    <orderEntry type="module" module-name="core-core" scope="PROVIDED" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.logging.log4j:log4j-api:2.11.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.logging.log4j:log4j-core:2.11.0" level="project" />
   </component>
 </module>

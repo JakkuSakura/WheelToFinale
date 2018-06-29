@@ -32,6 +32,7 @@ public class GpsCoordinate {
     }
 
 
+
     /**
      * using left-handed coordinate
      * @return a Vector3f with x,y,z sized between +1.0 and -1.0
@@ -44,11 +45,19 @@ public class GpsCoordinate {
     }
 
     public Vector3f calcVector3f() {
-        float y = (float) Math.sin(toRad(latitude));
-        float x = (float) Math.cos(toRad(longitude)) * Math.abs(y);
-        float z = (float) Math.sin(toRad(longitude)) * Math.abs(y);
+        float y = sin(latitude);
+        float x = cos(longitude) * cos(latitude);
+        float z = sin(longitude) * cos(latitude);
 
         return new Vector3f(x, y, z);
+    }
+
+    public static float cos(float longitude) {
+        return (float) Math.cos(toRad(longitude));
+    }
+
+    public static float sin(float latitude) {
+        return (float) Math.sin(toRad(latitude));
     }
 
 }
