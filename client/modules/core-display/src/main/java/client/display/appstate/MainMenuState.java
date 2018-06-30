@@ -34,7 +34,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package demo;
+package client.display.appstate;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -48,14 +48,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- *
- *  @author    Paul Speed
+ * @author Paul Speed
  */
 public class MainMenuState extends BaseAppState {
 
-    public static Class[] DEMOS = {
-    };
+    private List<AppState> DEMOS = new ArrayList<>();
+
+    public void addItem(AppState item) {
+        DEMOS.add(item);
+    }
 
     private Container mainWindow;
     private List<ToggleChild> toggles = new ArrayList<>();
@@ -64,13 +65,13 @@ public class MainMenuState extends BaseAppState {
     }
 
     /**
-     *  For states that close themselves, this lets the master list know that the
-     *  particular child demo is no longer open.  Basically, this lets the checkbox
-     *  update.
+     * For states that close themselves, this lets the master list know that the
+     * particular child demo is no longer open.  Basically, this lets the checkbox
+     * update.
      */
-    public void closeChild( AppState child ) {
-        for( ToggleChild toggle : toggles ) {
-            if( toggle.child == child ) {
+    public void closeChild(AppState child) {
+        for (ToggleChild toggle : toggles) {
+            if (toggle.child == child) {
                 toggle.close();
             }
         }
@@ -81,32 +82,35 @@ public class MainMenuState extends BaseAppState {
         return height / 720f;
     }
 
-    protected void showError( String title, String error ) {
+    protected void showError(String title, String error) {
         getState(OptionPanelState.class).show(title, error);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void initialize( Application app ) {
+    protected void initialize(Application app) {
+        GuiGlobals.initialize(app);
+
         mainWindow = new Container();
 
-        Label title = mainWindow.addChild(new Label("Lemur Demos"));
+        Label title = mainWindow.addChild(new Label("WheelToFinale Menu"));
         title.setFontSize(32);
         title.setInsets(new Insets3f(10, 10, 0, 10));
 
         Container actions = mainWindow.addChild(new Container());
         actions.setInsets(new Insets3f(10, 10, 0, 10));
 
-        for( Class demo : DEMOS ) {
-            ToggleChild toggle = new ToggleChild(demo);
+        for (AppState demo : DEMOS) {
+            ToggleChild toggle;
+            toggle = new ToggleChild(demo);
             toggles.add(toggle);
-            Checkbox cb = actions.addChild(new Checkbox(toggle.getName()));
+            Button cb = actions.addChild(new Button(toggle.getName()));
             cb.addClickCommands(toggle);
             cb.setInsets(new Insets3f(2, 2, 2, 2));
         }
 
 
-        ActionButton exit = mainWindow.addChild(new ActionButton(new CallMethodAction("Exit Demo", app, "stop")));
+        ActionButton exit = mainWindow.addChild(new ActionButton(new CallMethodAction("Exit", app, "stop")));
         exit.setInsets(new Insets3f(10, 10, 10, 10));
 
         // Calculate a standard scale and position from the app's camera
@@ -125,36 +129,38 @@ public class MainMenuState extends BaseAppState {
     }
 
     @Override
-    protected void cleanup( Application app ) {
+    protected void cleanup(Application app) {
     }
 
     @Override
     protected void onEnable() {
-        Node gui = ((SimpleApplication)getApplication()).getGuiNode();
+        Node gui = ((SimpleApplication) getApplication()).getGuiNode();
         gui.attachChild(mainWindow);
         GuiGlobals.getInstance().requestFocus(mainWindow);
+        GuiGlobals.getInstance().setCursorEventsEnabled(true);
     }
 
     @Override
     protected void onDisable() {
         mainWindow.removeFromParent();
+        GuiGlobals.getInstance().setCursorEventsEnabled(false);
     }
 
-    private static String classToName( Class type ) {
+    private static String classToName(Class type) {
         String n = type.getSimpleName();
-        if( n.endsWith("DemoState") ) {
+        if (n.endsWith("DemoState")) {
             n = n.substring(0, n.length() - "DemoState".length());
-        } else if( n.endsWith("State") ) {
+        } else if (n.endsWith("State")) {
             n = n.substring(0, n.length() - "State".length());
         }
 
         boolean lastLower = false;
         StringBuilder sb = new StringBuilder();
-        for( int i = 0; i < n.length(); i++ ) {
+        for (int i = 0; i < n.length(); i++) {
             char c = n.charAt(i);
-            if( lastLower && Character.isUpperCase(c) ) {
+            if (lastLower && Character.isUpperCase(c)) {
                 sb.append(" ");
-            } else if( Character.isLowerCase(c) ) {
+            } else if (Character.isLowerCase(c)) {
                 lastLower = true;
             }
             sb.append(c);
@@ -164,50 +170,40 @@ public class MainMenuState extends BaseAppState {
 
     private class ToggleChild implements Command<Button> {
         private String name;
-        private Checkbox check;
+        private Button check;
         private Class<?> type;
         private AppState child;
 
-        public ToggleChild( Class type ) {
-            this.type = type;
+        public ToggleChild(AppState child) {
+            this.type = child.getClass();
             this.name = classToName(type);
+            this.child = child;
         }
+
 
         public String getName() {
             return name;
         }
 
-        public void execute( Button button ) {
-            this.check = (Checkbox)button;
+        public void execute(Button button) {
+            this.check = button;
             System.out.println("Click:" + check);
-            if( check.isChecked() ) {
-                open();
-            } else {
-                close();
-            }
+            open();
         }
 
         public void open() {
-            if( child != null ) {
-                // Already open
-                return;
-            }
             try {
-                child = (AppState)type.getDeclaredConstructor().newInstance();
                 getStateManager().attach(child);
-            } catch( Exception e ) {
+
+            } catch (Exception e) {
                 showError("Error for demo:" + type.getSimpleName(), e.toString());
             }
+            setEnabled(false);
         }
 
         public void close() {
-            if( check != null ) {
-                check.setChecked(false);
-            }
-            if( child != null ) {
-                getStateManager().detach(child);
-                child = null;
-            }
+            getStateManager().detach(child);
         }
     }
+
 }

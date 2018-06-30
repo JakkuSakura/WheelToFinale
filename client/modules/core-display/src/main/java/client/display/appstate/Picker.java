@@ -1,4 +1,4 @@
-package client.display;
+package client.display.appstate;
 
 
 import client.display.event.EventMapper;
@@ -91,6 +91,8 @@ public abstract class Picker extends BaseAppState {
         reactor.addHandler(KeyEvent.class, new EventHandler() {
             @Override
             public void handler(Chain chain, Event event) {
+                if (!isInitialized() || !isEnabled())
+                    return;
                 CollisionResults pickResult = pick();
                 System.out.println(pickResult.size());
                 if (pickResult.size() > 0) {

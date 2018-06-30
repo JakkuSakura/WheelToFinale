@@ -11,16 +11,12 @@
 
     <artifactId>core-display</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>WheelToFinale</groupId>
-            <artifactId>base</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.jmonkeyengine</groupId>
             <artifactId>jme3-core</artifactId>
             <version>3.2.1-stable</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jmonkeyengine</groupId>
@@ -61,6 +57,7 @@
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
 </project>

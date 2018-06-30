@@ -1,4 +1,4 @@
-package client.display;
+package client.display.appstate;
 
 import com.jme3.app.Application;
 import com.jme3.font.BitmapFont;
@@ -41,7 +41,7 @@ public class FPSPicker extends Picker {
 
     @Override
     protected void onDisable() {
-        sapp.getGuiNode().removeFromParent();
+        cross.removeFromParent();
     }
 
     @Override

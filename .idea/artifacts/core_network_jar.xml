@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact name="core-network:jar">
+  <artifact build-on-make="true" name="core-network:jar">
     <output-path>$PROJECT_DIR$/client/modules/core-network/</output-path>
     <root id="root">
       <element id="archive" name="core-network.jar">

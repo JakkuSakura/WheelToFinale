@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact name="core-display:jar">
+  <artifact build-on-make="true" name="core-display:jar">
     <output-path>$PROJECT_DIR$/client/modules/core-display</output-path>
     <root id="root">
       <element id="archive" name="core-display.jar">
@@ -23,6 +23,7 @@
       <element id="library" level="project" name="Maven: net.java.jutils:jutils:1.0.0" />
       <element id="library" level="project" name="Maven: net.java.jinput:jinput-platform:natives-linux:2.0.5" />
       <element id="library" level="project" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" />
+      <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
     </root>
   </artifact>
 </component>

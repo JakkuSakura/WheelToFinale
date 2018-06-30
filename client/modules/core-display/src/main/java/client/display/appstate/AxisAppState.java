@@ -1,4 +1,4 @@
-package client.display;
+package client.display.appstate;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
