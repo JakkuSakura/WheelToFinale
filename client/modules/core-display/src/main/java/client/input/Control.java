@@ -1,5 +1,7 @@
 package client.input;
 
+import base.reactor.Reactor;
+import com.jme3.input.Input;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
@@ -7,8 +9,9 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.input.controls.Trigger;
-import base.reactor.Reactor;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,17 +24,26 @@ public class Control implements ActionListener {
     public static final String SPACE = "SPACE";
     public static final String LMB = "LMB";
     public static final String RMB = "RMB";
-    public static final Map<String, Trigger> map = new HashMap<String, Trigger>() {
-        {
-            put(UP, new KeyTrigger(KeyInput.KEY_UP));
-            put(DOWN, new KeyTrigger(KeyInput.KEY_DOWN));
-            put(LEFT, new KeyTrigger(KeyInput.KEY_LEFT));
-            put(RIGHT, new KeyTrigger(KeyInput.KEY_RIGHT));
-            put(SPACE, new KeyTrigger(KeyInput.KEY_SPACE));
-            put(LMB, new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
-            put(RMB, new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
+    public static final Map<String, Trigger> map = new HashMap<>();
+
+    public static void initTriger(Class<? extends Input> inputClazz, Class<? extends Trigger> triggerClazz) {
+        Field[] fields = inputClazz.getDeclaredFields();
+        for (Field field : fields) {
+            try {
+                map.put(field.getName(), triggerClazz.getDeclaredConstructor(int.class).newInstance(field.getInt(triggerClazz)));
+            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException | InstantiationException e) {
+                e.printStackTrace();
+            }
         }
-    };
+
+    }
+
+    static {
+        initTriger(KeyInput.class, KeyTrigger.class);
+        initTriger(MouseInput.class, MouseButtonTrigger.class);
+
+    }
+
 
     public void initKeys(InputManager inputManager) {
         map.forEach(inputManager::addMapping);
@@ -49,41 +61,26 @@ public class Control implements ActionListener {
         if (!isPressed)
             return;
         System.out.println(name);
-        KeyEvent.Keys key;
-        switch (name) {
-            case UP:
-                key = KeyEvent.Keys.UP;
-                break;
-            case DOWN:
-                key = KeyEvent.Keys.DOWN;
-                break;
-            case LEFT:
-                key = KeyEvent.Keys.LEFT;
-                break;
-            case RIGHT:
-                key = KeyEvent.Keys.RIGHT;
-                break;
-            case SPACE:
-                key = KeyEvent.Keys.SPACE;
-                break;
-            case LMB:
-                key = KeyEvent.Keys.LMB;
-                break;
-            case RMB:
-                key = KeyEvent.Keys.RMB;
-                break;
 
-            default:
-                key = KeyEvent.Keys.NONE;
-                break;
+        reactor.submitEvent(new KeyEvent(map.getOrDefault(name, new Trigger() {
+            @Override
+            public String getName() {
+                return "Unregistered";
+            }
 
-        }
-
-        reactor.submitEvent(new KeyEvent(key));
+            @Override
+            public int triggerHashCode() {
+                return -100086;
+            }
+        })));
     }
 
     public Reactor getReactor() {
         return reactor;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 

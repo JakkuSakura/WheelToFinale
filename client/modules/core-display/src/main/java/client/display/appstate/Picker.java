@@ -1,6 +1,10 @@
 package client.display.appstate;
 
 
+import base.events.Event;
+import base.reactor.Chain;
+import base.reactor.EventHandler;
+import base.reactor.Reactor;
 import client.display.event.EventMapper;
 import client.input.KeyEvent;
 import com.jme3.app.Application;
@@ -8,14 +12,12 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.input.MouseInput;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
-import base.events.Event;
-import base.reactor.Chain;
-import base.reactor.EventHandler;
-import base.reactor.Reactor;
 
 
 public abstract class Picker extends BaseAppState {
@@ -33,7 +35,6 @@ public abstract class Picker extends BaseAppState {
     @Override
     protected void cleanup(Application app) {
     }
-
 
 
     /**
@@ -103,7 +104,10 @@ public abstract class Picker extends BaseAppState {
 
             @Override
             public boolean check(Event event) {
-                return event.convert(KeyEvent.class).map((a) -> a.getKey() == KeyEvent.Keys.LMB).orElse(false);
+                return event.convert(KeyEvent.class).map(KeyEvent::getKey).convert(MouseButtonTrigger.class)
+                        .map(MouseButtonTrigger::getMouseButton)
+                        .map(button -> button == MouseInput.BUTTON_LEFT)
+                        .orElse(false);
             }
         });
     }
