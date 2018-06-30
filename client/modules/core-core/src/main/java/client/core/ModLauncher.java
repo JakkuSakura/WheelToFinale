@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.ClassLoader.getSystemClassLoader;
 
 
 public class ModLauncher implements ModuleBase {
@@ -22,36 +21,15 @@ public class ModLauncher implements ModuleBase {
     private static String GAME_MOD_PATH = "modules";
     private static Reactor rootReactor = new Reactor();
 
-    private static URLClassLoader loader = new URLClassLoader(new URL[0], getSystemClassLoader());
-    private static Method addURL = initAddMethod();
+    private static ModClassLoader loader = new ModClassLoader();
 
-    /**
-     * 通过filepath加载文件到classpath。
-     * @param file 文件路径
-     */
-    private static void addURL(File file) {
-        try {
-            addURL.invoke(loader, file.toURI().toURL());
-        }
-        catch (Exception ignored) {
-        }
+    public ModLauncher() {
+        Thread.currentThread().setContextClassLoader(ModLauncher.getLoader());
     }
-
-    private static Method initAddMethod() {
-        try {
-            Method add = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-            add.setAccessible(true);
-            return add;
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
     public static void generateDefaultJson() throws IOException {
         Gson gson = new Gson();
-        FileWriter writer = new FileWriter("modules/default.json");
+        FileWriter writer = new FileWriter(joinPath(GAME_MOD_PATH, "default.json"));
         gson.toJson(new GameModuleInfo(), writer);
         writer.close();
 
@@ -59,11 +37,10 @@ public class ModLauncher implements ModuleBase {
 
     public static void loadModulesList() throws IOException {
         File file = new File(GAME_MOD_PATH);
-        String[] modules = file.list();
-        for (String e : modules != null ? modules : new String[0]) {
-            if (!new File(joinPath(GAME_MOD_PATH, e)).isDirectory()) //simply ignore files in modules path
-                continue;
-            GameModuleInfo gameModuleInfo = loadModuleInfo(e);
+        File[] modules = file.listFiles(File::isDirectory);
+        assert modules != null;
+        for(File e : modules){
+            GameModuleInfo gameModuleInfo = loadModuleInfo(e.getName());
             if (gameModuleInfo != null) {
                 gameModuleInfos.add(gameModuleInfo);
                 System.out.println("loaded info of " + gameModuleInfo.getName() + " version " + gameModuleInfo.getVersion());
@@ -107,7 +84,11 @@ public class ModLauncher implements ModuleBase {
         File modulePath = new File(pathname);
         File[] files = modulePath.listFiles((dir, name) -> name.endsWith(".jar"));
         for (File file : files != null ? files : new File[0]) {
-            addURL(file);
+            try {
+                loader.addURL(file.toURI().toURL());
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         try {
@@ -159,7 +140,6 @@ public class ModLauncher implements ModuleBase {
 
     @Override
     public void init(Reactor reactor) {
-
         // nothing to do
     }
 
@@ -175,7 +155,6 @@ public class ModLauncher implements ModuleBase {
     }
 
     public static void main(String[] args) throws IOException {
-        Thread.currentThread().setContextClassLoader(ModLauncher.getLoader());
         generateDefaultJson();
         loadAllModules();
         getRootReactor().submitEvent(new StartClientEvent());
